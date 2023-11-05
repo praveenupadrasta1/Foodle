@@ -1,0 +1,128 @@
+<ion-header>
+  <ion-item>
+    <ion-label>
+      Cart
+    </ion-label>
+    <ion-button (click)="closeCart()" color="danger">
+      <ion-icon name="caret-down-circle" color="white"></ion-icon>
+    </ion-button>
+  </ion-item>
+</ion-header>
+
+<ion-content color="light" class="unselectable">
+  <ion-list *ngIf="currentCityCartProducts.length > 0 && !isLoading">
+    <ion-item lines="none" *ngFor="let product of currentCityCartProducts; let i=index">
+      <ion-card class="card-product">
+        <ion-card-content>
+          <div class="top-content">
+            <div class="product-name">
+              {{product.name}}
+            </div>
+            <div class="delete-button">
+              <ion-button (click)="removeProductFromCart(product.variant_id, i)" color="danger">
+                <ion-icon name="trash" color="white"></ion-icon>
+              </ion-button>
+            </div>
+          </div>
+          <div class="unit-price">
+            {{product.sale_price | currency : "Rp. ":"Rp. ":"1.0" | decimalReplace: ",":"." }} / {{product.uom}}
+          </div>
+          <div class="bottom-content">
+            <div class="quantity">
+              <div class="remove-button">
+                <ion-button color="danger" (click)="onClickDecreaseQty(product.variant_id, product.moq, i)">
+                  <ion-icon *ngIf="product.quantity > product.moq" name="remove-sharp" color="white"></ion-icon>
+                  <ion-icon *ngIf="product.quantity <= product.moq" name="trash" color="white"></ion-icon>
+                </ion-button>
+              </div>
+              <div class="lbl-quantity">
+                <ion-label [id]="'qty-lbl-'+product.variant_id">
+                  {{product.quantity}}
+                </ion-label>
+              </div>
+              <div class="add-button">
+                <ion-button [disabled]="product.quantity >= product.inventory_level? true: false" color="darkgreen"
+                  (click)="onClickIncreaseQty(product.variant_id, product.moq, product.mxoq, 
+                product.inventory_level, i)">
+                  <ion-icon name="add-sharp" color="white"></ion-icon>
+                </ion-button>
+              </div>
+            </div>
+            <div class="total">
+              {{ getProductTotalPrice(product.sale_price, product.quantity) | currency : "Rp. ":"Rp. ":"1.0" | decimalReplace: ",":"." }}
+            </div>
+          </div>
+        </ion-card-content>
+      </ion-card>
+
+      <ion-card class="parent-container">
+        <ion-row>
+          <ion-col class="col-image">
+            <img [src]='product.img_url'>
+          </ion-col>
+          <ion-col class="col-name">
+            <ion-label>{{product.name}}</ion-label>
+          </ion-col>
+          <ion-col class="col-quantity">
+            <div class="quantity-selector">
+              <div class="remove-button">
+                <ion-button color="danger" (click)="onClickDecreaseQty(product.variant_id, product.moq, i)">
+                  <ion-icon *ngIf="product.quantity > product.moq" name="remove-sharp" color="white"></ion-icon>
+                  <ion-icon *ngIf="product.quantity <= product.moq" name="trash" color="white"></ion-icon>
+                </ion-button>
+              </div>
+              <div class="lbl-quantity">
+                <ion-label [id]="'qty-lbl-'+product.variant_id">
+                  {{product.quantity}}
+                </ion-label>
+              </div>
+              <div class="add-button">
+                <ion-button [disabled]="product.quantity >= product.inventory_level? true : false ||
+                  product.quantity >= product.mxoq? true : false" color="darkgreen" (click)="onClickIncreaseQty(product.variant_id, product.moq, product.mxoq, 
+                product.inventory_level, i)">
+                  <ion-icon name="add-sharp" color="white"></ion-icon>
+                </ion-button>
+              </div>
+            </div>
+          </ion-col>
+
+          <ion-col class="col-unit-price">
+            <ion-label>
+              {{product.sale_price | currency : "Rp. ":"Rp. ":"1.0" | decimalReplace: ",":"." }} / {{product.uom}}
+            </ion-label>
+          </ion-col>
+
+          <ion-col class="col-total">
+            <ion-label>
+              {{ getProductTotalPrice(product.sale_price, product.quantity) | currency : "Rp. ":"Rp. ":"1.0" | decimalReplace: ",":"." }}
+            </ion-label>
+          </ion-col>
+          <ion-col class="col-delete-button">
+            <div class="delete-button">
+              <ion-button (click)="removeProductFromCart(product.variant_id, i)" color="danger">
+                <ion-icon name="trash" color="white"></ion-icon>
+              </ion-button>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-card>
+    </ion-item>
+  </ion-list>
+  <div class="img-no-data-available" *ngIf="currentCityCartProducts.length == 0 && !isLoading">
+    <ion-img src="../../assets/empty_cart.svg">
+    </ion-img>
+  </div>
+</ion-content>
+
+<ion-footer>
+  <div>
+    <div class="subtotal">
+      <ion-label>Subtotal: <b>{{ getSubtotal() | currency : "Rp. ":"Rp. ":"1.0" | decimalReplace: ",":"." }}</b>
+      </ion-label>
+    </div>
+    <div class="checkout-btn">
+      <ion-button [disabled]="!this.currentCityCartProducts.length? true: false" id="btn-checkout" color="darkgreen"
+        (click)="createCart()">Checkout</ion-button>
+    </div>
+  </div>
+</ion-footer>

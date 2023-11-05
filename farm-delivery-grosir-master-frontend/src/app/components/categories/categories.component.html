@@ -1,0 +1,42 @@
+<ion-grid fixed>
+  <ion-row>
+    <ion-col size="12">
+      <div class="title-section">Kategori</div>
+    </ion-col>
+  </ion-row>
+  <div *ngIf="categories.length > 0">
+    <ion-row>
+      <ion-col *ngFor="let category of categories">
+        <div class="category-container" tappable (click)="openProductsPage(category.name, category.id)">
+          <ion-card class="ion-activatable ripple-parent">
+            <ion-ripple-effect></ion-ripple-effect>
+            <div class="img-container">
+              <img [src]="category.image_url">
+            </div>
+            <div class="category-name-container">
+              <ion-card-subtitle>{{category.name}}</ion-card-subtitle>
+            </div>
+          </ion-card>
+        </div>
+      </ion-col>
+    </ion-row>
+  </div>
+  <div *ngIf="categories.length == 0 && isLoading">
+    <ion-row>
+      <ion-col *ngFor="let item of [1,2,3,4,5]">
+        <div class="category-container">
+          <ion-card>
+            <div class="img-container">
+              <ion-skeleton-text animated style="width: 150px; height: 150px"></ion-skeleton-text>
+            </div>
+            <div class="category-name-container">
+              <ion-skeleton-text animated
+                style="width: 80%; height: 20px; display: block; margin-left: auto; margin-right: auto;">
+              </ion-skeleton-text>
+            </div>
+          </ion-card>
+        </div>
+      </ion-col>
+    </ion-row>
+  </div>
+</ion-grid>

@@ -1,0 +1,73 @@
+<!-- <ion-header>
+  <ion-toolbar>
+    <ion-title>Pesanan Saya</ion-title>
+  </ion-toolbar>
+</ion-header> -->
+
+<ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="refreshPage($event)" *ngIf="!isBrowser">
+    <ion-refresher-content pullingIcon="arrow-down-outline" pullingText="Pull to refresh" refreshingSpinner="dots"
+      refreshingText="Refreshing...">
+    </ion-refresher-content>
+  </ion-refresher>
+  <ion-list class="list-orders" *ngIf="customerOrders.length > 0">
+    <ion-card *ngFor="let order of customerOrders" class="card-order" (click)="goToOrderDetailPage(order)">
+      <div class="ion-activatable ripple-parent">
+        <ion-ripple-effect></ion-ripple-effect>
+        <ion-row [ngStyle]="{'background-color': order.status_color}">
+          <ion-col>
+            <div></div>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="2" class="order-date">
+            <div class="year">{{order.year_created}}</div>
+            <div class="date">{{order.date_created}}</div>
+            <div class="month">{{order.month_created}}</div>
+          </ion-col>
+          <ion-col size="6" class="order-info">
+            <div class="lbl-id">Order ID: <b class="id">#{{order.id}}</b></div>
+            <div class="total-items-info">Jumlah Barang: <b class="total">{{order.items_total}}</b></div>
+            <div class="area">{{order.billing_address.city}}</div>
+          </ion-col>
+          <ion-col class="order-status">
+            <div class="status">{{order.status}}</div>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col class="col-pre-empty"></ion-col>
+          <ion-col class="delivery-info">
+            <div class="lbl">Waktu pengiriman</div>
+            <div class="delivery-date">{{order.customer_message}}</div>
+          </ion-col>
+          <ion-col class="col-post-empty"></ion-col>
+        </ion-row>
+        <ion-footer>
+          <div class="total-info">
+            Jumlah: <b
+              class="total">{{order.total_inc_tax | currency : "Rp. ":"Rp. ":"1.0" | decimalReplace: ",":"." }}</b>
+          </div>
+          <div *ngIf="order.status_id == 4 || order.status_id == 14" class="total-info danger-color">
+            Refunded: <b
+              class="total">{{order.refunded_amount | currency : "Rp. ":"Rp. ":"1.0" | decimalReplace: ",":"." }}</b>
+          </div>
+        </ion-footer>
+      </div>
+    </ion-card>
+  </ion-list>
+  <ion-list class="list-orders" *ngIf="customerOrders.length == 0 && isLoading">
+    <ion-card *ngFor="let item of [1,2,3,4,5]" style="width: 100%; height: 150px">
+      <div class="ion-activatable ripple-parent">
+        <ion-row>
+          <ion-skeleton-text animated style="width: 100%; height: 130px"></ion-skeleton-text>
+        </ion-row>
+        <ion-footer style="width: 100%; height: 30px">
+          <ion-skeleton-text animated style="width: 100%; height: 20px"></ion-skeleton-text>
+        </ion-footer>
+      </div>
+    </ion-card>
+  </ion-list>
+  <div class="img-no-data-available" *ngIf="customerOrders.length == 0 && !isLoading">
+    <ion-img src="../../../assets/no-orders.svg"></ion-img>
+  </div>
+</ion-content>

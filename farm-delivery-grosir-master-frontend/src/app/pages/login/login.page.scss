@@ -1,0 +1,86 @@
+$font-family: 'Roboto';
+$font-size-micro: 10px;
+
+.login-left {
+  @media(min-width: 769px) {
+    --background: var(--ion-color-primary) url('../../../assets/register-page.jpg') no-repeat center center / cover;
+  }
+}
+
+.login-right {
+  @media(max-width: 769px) {
+    --background: var(--ion-color-primary) url('../../../assets/register-page.jpg') no-repeat center center / cover;
+  }
+
+  @media(min-width: 769px) {
+    --background: #fff;
+  }
+}
+
+.split {
+  height: 100%;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  overflow-x: hidden;
+  padding-top: 20px;
+}
+
+.left {
+  left: 0;
+
+  @media(min-width: 769px) {
+    width: 60%;
+  }
+}
+
+.right {
+  right: 0;
+
+  // --background: #fff;
+  @media(min-width: 769px) {
+    width: 40%;
+  }
+}
+
+.centered {
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-transform: none;
+  text-align: left;
+
+  @media(min-width: 1050px) {
+    max-width: 80%;
+  }
+
+  @media(max-width: 1050px) {
+    max-width: 99%;
+  }
+
+  @media(min-width: 500px) and (max-width: 768px) {
+    background-color: white;
+    width: 60%;
+    padding: 10px;
+  }
+
+  @media (max-width: 499px) {
+    background-color: white;
+    width: 75%;
+    padding: 10px;
+  }
+}
+
+.centered img {
+  width: 150px;
+  border-radius: 50%;
+}
+
+.subtitle {
+  font-size: 8px;
+}
+
+#firebaseui-auth-container {
+  font-family: $font-family;
+}

@@ -1,0 +1,103 @@
+@import '../../../theme/variables.scss';
+
+$font-family: 'Roboto';
+
+ion-header {
+    ion-item {
+        --background: var(--ion-color-primary);
+        ion-label {
+            font-family: $font-family;
+            font-size: medium;
+            font-weight: bold;
+        }
+    }
+}
+
+ion-content {
+    .add-new-address-btn-container {
+        width: 95%;
+        text-align: right;
+        margin-top: 5px;
+
+        ion-button {
+            font-family: $font-family;
+            font-size: small;
+            text-transform: none !important;
+        }
+    }
+
+    .list-address {
+        padding: 10px;
+
+        ion-item {
+            --background: var(--ion-color-light) !important;
+
+            ion-card {
+                width: 100%;
+                margin-left: 5px;
+                margin-right: 5px;
+                
+                .btn-select {
+                    margin: 10px;
+                    float: right;
+                    text-transform: none !important;
+                    font-family: $font-family;
+                    font-size: small;
+                    position: relative;
+                    z-index: 999;
+                }
+
+                ion-card-content {
+                    position: relative;
+                    z-index: 1;
+
+                    .content {
+                        font-family: $font-family;
+                        color: black;
+                        font-size: small;
+                    }
+
+                    .btn-container {
+                        display: inline-block;
+
+                        .btn-delete,
+                        .btn-update {
+                            float: left;
+
+                            ion-button {
+                                font-family: $font-family;
+                                font-size: small;
+                                text-transform: none !important;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .img-container {
+        ion-img {
+            max-height: 100%;
+            max-width: 100%;
+            position: absolute;
+            top: 15%;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            margin: auto;
+        }
+    }
+}
+
+// ion-footer{
+//     .btn-submit{
+//         text-align: center;
+//         ion-button{
+//             width: 60%;
+//             font-family: $font-family;
+//             font-size: small;
+//             text-transform: none !important;
+//         }
+//     }
+// }

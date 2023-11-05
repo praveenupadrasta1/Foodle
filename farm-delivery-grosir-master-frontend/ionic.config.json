@@ -1,0 +1,7 @@
+{
+  "name": "Farm Delivery Grosir",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}

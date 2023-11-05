@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="home" text="" icon="chevron-back-outline" color="white"></ion-back-button>
+    </ion-buttons>
+    <ion-title color="white" class="unselectable">{{key}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="unselectable" color="light">
+  <ion-refresher slot="fixed" (ionRefresh)="refreshPage($event)" *ngIf="!isBrowser">
+    <ion-refresher-content pullingIcon="arrow-down-outline" pullingText="Pull to refresh" refreshingSpinner="dots"
+      refreshingText="Refreshing...">
+    </ion-refresher-content>
+  </ion-refresher>
+  <div *ngIf="isOnline">
+    <app-search-results [doRefresh]="doRefresh" [keyword]="key" [isBarcodeSearch]="isBarcodeSearch"
+      class="unselectable"></app-search-results>
+  </div>
+  <div class="img-no-data-available" [style.display]="!isOnline? '' : 'none'">
+    <img src="../../../assets/offline.svg">
+  </div>
+  <div class="btn-container" *ngIf="!isOnline">
+    <ion-button color="darkgreen" (click)="refresh()">Coba Lagi!</ion-button>
+  </div>
+</ion-content>
+
+<ion-footer>
+  <app-cart></app-cart>
+</ion-footer>

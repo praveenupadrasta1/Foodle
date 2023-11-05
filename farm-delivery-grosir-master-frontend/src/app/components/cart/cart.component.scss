@@ -1,0 +1,114 @@
+.ripple-parent {
+    position: relative;
+    overflow: hidden;
+}
+
+@media (max-width: 500px) {
+    ion-card {
+        width: 100%;
+        background-color: white;
+        height: 50px;
+        margin: 0px;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        box-shadow: darkslategrey;
+    }
+
+    ion-row {
+        height: 100%;
+    }
+
+    .up-icon-container {
+        margin-right: 50px;
+        text-align: right;
+    }
+
+    ion-icon {
+        width: 30px;
+        height: 30px;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        -moz-transform: translateY(-50%);
+        -o-transform: translateY(-50%);
+        -ms-transform: translateY(-50%);
+        -webkit-transform: translateY(-50%);
+    }
+
+    ion-badge {
+        position: relative;
+        top: 1px;
+        left: 20px;
+        font-size: 10px;
+    }
+
+    ion-label {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        margin-left: 70px;
+        font-family: 'Roboto';
+        font-size: medium;
+        font-weight: bold;
+        color: black;
+    }
+
+    .cart-icon-label-container {
+        margin-left: 20px;
+    }
+}
+
+@media (min-width: 500px) {
+    ion-card {
+        width: 100%;
+        background-color: white;
+        height: 60px;
+        margin: 0px;
+        border-top-left-radius: 20px;
+        border-top-right-radius: 20px;
+        box-shadow: darkslategrey;
+    }
+
+    ion-row {
+        height: 100%;
+    }
+
+    .up-icon-container {
+        margin-right: 50px;
+        text-align: right;
+    }
+
+    ion-icon {
+        width: 35px;
+        height: 35px;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        -moz-transform: translateY(-50%);
+        -o-transform: translateY(-50%);
+        -ms-transform: translateY(-50%);
+        -webkit-transform: translateY(-50%);
+    }
+
+    ion-badge {
+        position: relative;
+        font-size: 12px;
+        top: 5px;
+        left: 25px;
+    }
+
+    ion-label {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        margin-left: 70px;
+        font-family: 'Roboto';
+        font-size: large;
+        font-weight: bold;
+        color: black;
+    }
+
+    .cart-icon-label-container {
+        margin-left: 20px;
+    }
+}

@@ -1,0 +1,8 @@
+<ion-list>
+  <!-- <ion-list-header>Akun</ion-list-header> -->
+  <ion-item *ngIf="isUserAuthenticated" button (click)="openMyAccountPage()">Akun Saya</ion-item>
+  <ion-item *ngIf="isUserAuthenticated" button (click)="openMyOrdersPage()">Pesanan Saya</ion-item>
+  <ion-item *ngIf="isUserAuthenticated" button (click)="signOut()" lines="none">Keluar</ion-item>
+  <ion-item *ngIf="!isUserAuthenticated" button (click)="openLogin()" lines="none">Masuk</ion-item>
+  <ion-item *ngIf="!isUserAuthenticated" button (click)="openRegister()" lines="none">Daftar</ion-item>
+</ion-list>

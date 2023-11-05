@@ -1,0 +1,39 @@
+.child {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.parent {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    height: max-content;
+    font-family: "Roboto";
+}
+
+div {
+    margin: 10px;
+}
+
+ion-icon {
+    margin-right: 5px;
+}
+
+.twitter {
+    color: #1DA1F2;
+}
+
+.instagram {
+    color: #FD1D1D;
+}
+
+.facebook {
+    color: #4267B2;
+}
+
+.whatsapp {
+    color: #25D366;
+}

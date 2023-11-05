@@ -1,0 +1,19 @@
+<ion-content>
+  <div class="image-container">
+    <img *ngIf="orderStatus" class="img-success" src="../../../assets/Successful_order_purchase.svg">
+    <img *ngIf="!orderStatus" class="img-success" src="../../../assets/Failure_order_purchase.svg">
+  </div>
+  <div class="btn-container">
+    <ion-button color="darkgreen" (click)="goHome()">
+      <ion-icon name="home"></ion-icon>Kembali Halaman Depan
+    </ion-button>
+  </div>
+  <div class="btn-container">
+    <ion-button *ngIf="orderStatus" color="medium" (click)="goToMyOrders()">
+      <ion-icon name="cart"></ion-icon>Pesanan Saya
+    </ion-button>
+    <!-- <ion-button *ngIf="!orderStatus" color="medium">
+      <ion-icon name="cart"></ion-icon>Cart
+    </ion-button> -->
+  </div>
+</ion-content>

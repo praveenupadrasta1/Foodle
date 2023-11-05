@@ -1,0 +1,72 @@
+<ion-header>
+  <ion-item>
+    <ion-label class="heading">
+      Ganti Area, Tanggal & Waktu Pengiriman
+    </ion-label>
+    <ion-button (click)="closeModal()" color="danger">
+      <ion-icon name="close-circle-sharp" color="white"></ion-icon>
+    </ion-button>
+  </ion-item>
+</ion-header>
+<ion-content>
+  <div id="parent-container">
+    <div id="location-container">
+
+      <div class="label-container">
+        <ion-label>Mau Dikirim Kemana?</ion-label>
+      </div>
+      <div class="city-select-box-container">
+        <ion-select #userSelect okText="Pilih" cancelText="Menutup" (ionChange)="cityChanged(userSelect.value)"
+          class="modalPopup" [value]="selectedCity" style="padding: 10px;">
+          <ion-select-option *ngFor="let city of entireCityData" [value]="city.city">{{city.city}}</ion-select-option>
+        </ion-select>
+      </div>
+    </div>
+
+    <div id="date-container">
+      <div class="label-container">
+        <ion-label>Pilih Tanggal Pengiriman</ion-label>
+      </div>
+      <!-- <div class="label-container">
+        <ion-label style="color:maroon">Pengiriman pada hari yang sama hanya tersedia jika pesanan dilakukan sebelum 10 jam dari waktu pengiriman yang tersedia</ion-label>
+      </div> -->
+      <ion-row class="row-date">
+        <ion-col class="col-date" *ngFor="let date of orderPossibleDates">
+          <ion-card type="button" [disabled]="date.isDisabled"
+            (click)="deliveryDateChanged(date.formattedDate, date.id)">
+            <button ion-item [id]="'button'+date.id">
+              <ion-icon [id]="'dateicon'+date.id" name="calendar-outline" color="black"></ion-icon>
+              <div [id]="'cardtitle'+date.id" class="card-title">{{date.day}}</div>
+              <div [id]="'cardsubtitle'+date.id" class="card-subtitle">{{date.localeDate}}</div>
+            </button>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </div>
+
+    <div id="time-container">
+
+      <div class="label-container">
+        <ion-label>Pilih Waktu Pengiriman</ion-label>
+      </div>
+
+      <div class="time-select-box-container">
+        <ion-select #userSelectedOption [value]="selectedDeliveryTime"
+          (ionChange)="deliveryTimeChanged(userSelectedOption.value)" style="padding: 10px;">
+          <ion-select-option okText="Pilih" cancelText="Menutup" *ngFor="let deliveryTime of deliveryPossibleTimes"
+            [value]="deliveryTime.time">{{deliveryTime.time}}</ion-select-option>
+        </ion-select>
+      </div>
+    </div>
+
+    <!-- <div id="button-container">
+      <ion-button color="darkgreen" class="submit-button" (click)="submit()">Lanjut</ion-button>
+    </div> -->
+  </div>
+</ion-content>
+
+<ion-footer>
+  <div id="button-container">
+    <ion-button color="darkgreen" class="submit-button" (click)="submit()">Lanjut</ion-button>
+  </div>
+</ion-footer>

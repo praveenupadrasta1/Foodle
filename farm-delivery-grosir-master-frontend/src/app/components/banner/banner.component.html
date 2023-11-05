@@ -1,0 +1,25 @@
+<div *ngIf="bannersData.length > 0">
+  <ion-slides loop="true" pager="true" [options]="slideOpts">
+    <ion-slide class="banner-image" *ngFor="let banner of bannersData"
+      [ngStyle]="{'background-image': 'url(' + banner.images[imgUrl] + ')'}" (click)="goToBannerPage(banner)">
+      <!-- <ion-card>
+        <img-loader [src]="banner.img_url" useImg></img-loader>
+        <div class="div-banner-img" [ngStyle]="{'background-image': 'url(' + banner.img_url + ')'}" ></div>
+      </ion-card> -->
+    </ion-slide>
+  </ion-slides>
+</div>
+<div *ngIf="bannersData.length == 0">
+  <ion-slides loop="true" pager="true" [options]="slideOpts">
+    <ion-slide class="banner-image">
+      <ion-card>
+        <ion-skeleton-text animated style="width: 1300px; height: 220px"></ion-skeleton-text>
+      </ion-card>
+    </ion-slide>
+    <ion-slide class="banner-image">
+      <ion-card>
+        <ion-skeleton-text animated style="width: 1300px; height: 220px"></ion-skeleton-text>
+      </ion-card>
+    </ion-slide>
+  </ion-slides>
+</div>

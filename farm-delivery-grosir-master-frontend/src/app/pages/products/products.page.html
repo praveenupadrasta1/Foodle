@@ -1,0 +1,67 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="home" text="" icon="chevron-back-outline" color="white"></ion-back-button>
+    </ion-buttons>
+    <ion-title color="white" class="unselectable">{{categoryName}}</ion-title>
+    <div (click)="goToSearch()" class="search" slot="end" tappable>
+      <ion-icon name="search-sharp" color="white"></ion-icon>
+    </div>
+    <div (click)="showFilterOptions()" class="header-filter" slot="end" tappable>
+      <ion-icon name="funnel" color="white"></ion-icon>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="light">
+  <ion-refresher slot="fixed" (ionRefresh)="refreshPage($event)" *ngIf="!isBrowser">
+    <ion-refresher-content pullingIcon="arrow-down-outline" pullingText="Pull to refresh" refreshingSpinner="dots"
+      refreshingText="Refreshing...">
+    </ion-refresher-content>
+  </ion-refresher>
+  <div class="parent-container">
+    <ion-card>
+      <ion-row>
+        <ion-col size="7">
+          <app-search-bar-global></app-search-bar-global>
+        </ion-col>
+        <ion-col size="5">
+          <div class="filter">
+            <ion-item>
+              <ion-icon name="funnel" color="dark"></ion-icon>
+              <ion-label>Urutkan</ion-label>
+              <ion-select #filterBy (ionChange)="onChange(filterBy.value)" [value]="filterType" okText="Lanjut"
+                cancelText="Close">
+                <ion-select-option value="A-Z">A-Z</ion-select-option>
+                <ion-select-option value="Z-A">Z-A</ion-select-option>
+                <ion-select-option value="Harga Tertinggi">Harga Tertinggi</ion-select-option>
+                <ion-select-option value="Harga Terendah">Harga Terendah</ion-select-option>
+                <ion-select-option value="Diskon">Diskon</ion-select-option>
+              </ion-select>
+            </ion-item>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-card>
+  </div>
+  <div class="spacer"></div>
+  <div *ngIf="isOnline">
+    <app-products [categoryId]="categoryId" [filterBy]="filterType" [doRefresh]="doRefresh" class="unselectable">
+    </app-products>
+  </div>
+  <div class="img-no-data-available" [style.display]="!isOnline? '' : 'none'">
+    <img src="../../../assets/offline.svg">
+  </div>
+  <div class="btn-container" *ngIf="!isOnline">
+    <ion-button color="darkgreen" (click)="refresh()">Coba Lagi!</ion-button>
+  </div>
+
+  <ion-select #filterSelect (ionChange)="onChange(filterSelect.value)" [hidden]="true" [value]="filterType"
+    okText="Lanjut" cancelText="Close">
+    <ion-select-option *ngFor="let option of filterOptions" [value]="option">{{option}}</ion-select-option>
+  </ion-select>
+</ion-content>
+
+<ion-footer>
+  <app-cart></app-cart>
+</ion-footer>

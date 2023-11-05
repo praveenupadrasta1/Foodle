@@ -1,0 +1,143 @@
+<ion-content>
+  <div class="centered">
+    <ion-title size="large" slot="start">Pengaturan akun</ion-title>
+    <ion-card>
+      <ion-card-content>
+        <ion-item-group>
+          <ion-item-divider>
+            <ion-label class="label">Info anda</ion-label>
+          </ion-item-divider>
+          <ion-item lines="inset">
+            <ion-row>
+              <ion-col size-xs="3" size-sm="3" size-md="2" size-lg="2" size-xl="2">
+                <ion-label class="fixed-label label">Jenis profil</ion-label>
+              </ion-col>
+              <ion-col size-xs="9" size-sm="9" size-md="10" size-lg="10" size-xl="10">
+                <ion-label class="value-label label">
+                  <ion-icon class="google-logo" name="logo-google" *ngIf="profileTypeId === 2"></ion-icon>
+                  {{ profileType }}
+                </ion-label>
+              </ion-col>
+            </ion-row>
+          </ion-item>
+          <ion-item lines="none">
+            <ion-row class="name">
+              <ion-col size-xs="3" size-sm="3" size-md="2" size-lg="2" size-xl="2">
+                <ion-label class="fixed-label label">Nama</ion-label>
+              </ion-col>
+              <ion-col size-xs="9" size-sm="9" size-md="6" size-lg="6" size-xl="6" *ngIf="!editMode">
+                <ion-label class="value-label label display-label">{{ displayName }}</ion-label>
+              </ion-col>
+              <ion-col size-xs="9" size-sm="9" size-md="4" size-lg="5" size-xl="5" *ngIf="editMode">
+                <ion-input name="name" type="text" required class="value-label label input-field"
+                  [(ngModel)]="displayNameChanged" #displayInput></ion-input>
+              </ion-col>
+              <ion-col size-xs="3" size-sm="3" size-md="0" size-lg="0" size-xl="0" *ngIf="!editMode">
+              </ion-col>
+              <ion-col size-xs="6" size-sm="6" size-md="3" size-lg="3" size-xl="3"
+                *ngIf="profileTypeId === 1 && !editMode">
+                <ion-button class="edit-button" (click)="focusInput() ; editMode=!editMode">
+                  <ion-label class="label" color="white">Ubah Nama</ion-label>
+                </ion-button>
+              </ion-col>
+              <ion-col size-xs="6" size-sm="6" size-md="3" size-lg="2" size-xl="2"
+                *ngIf="profileTypeId === 1 && editMode">
+                <ion-button class="edit-button" color="danger"
+                  (click)="editMode=!editMode; displayNameChanged = displayName">
+                  <ion-label class="label" color="white">Batalkan</ion-label>
+                </ion-button>
+              </ion-col>
+              <ion-col size-xs="6" size-sm="6" size-md="3" size-lg="3" size-xl="2"
+                *ngIf="profileTypeId === 1 && editMode">
+                <ion-button class="edit-button" color="darkgreen" (click)="updateName()">
+                  <ion-label class="label" color="white">Menyimpan</ion-label>
+                </ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-item>
+          <ion-item *ngIf="isInvalidName">
+            <p class="error-msg">Salah nama!! Hanya Huruf yang diperbolehkan</p>
+          </ion-item>
+          <ion-item lines="none">
+            <ion-row>
+              <ion-col size-xs="3" size-sm="3" size-md="2" size-lg="2" size-xl="2">
+                <ion-label fixed class="fixed-label label">Email</ion-label>
+              </ion-col>
+              <ion-col size-xs="9" size-sm="9" size-md="10" size-lg="10" size-xl="10">
+                <ion-label class="value-label label">{{ emailAddress }}</ion-label>
+              </ion-col>
+            </ion-row>
+          </ion-item>
+          <ion-item>
+            <ion-row>
+              <ion-col size-xs="3" size-sm="3" size-md="2" size-lg="2" size-xl="2">
+                <ion-label class="fixed-label label">Status Verifikasi Email</ion-label>
+              </ion-col>
+              <ion-col size-xs="4" size-sm="4" size-md="5" size-lg="5" size-xl="5">
+                <ion-label class="value-label label">
+                  {{ emailVerifiedText }} <ion-icon name="checkmark-circle" *ngIf="emailVerified" class="checked"></ion-icon> 
+                                          <ion-icon name="close-circle" *ngIf="!emailVerified" class="not-checked"></ion-icon>
+                </ion-label>
+              </ion-col>
+              <ion-col size-xs="5" size-sm="5" size-md="5" size-lg="5" size-xl="5" *ngIf="!emailVerified">
+                <ion-button class="edit-button" size="default" (click)="sendVerificationEmail()" [disabled]="verificationEmailSentNow"><ion-label class="label" color="white">Kirim email verifikasi</ion-label></ion-button>
+                <ion-label class="error-msg timer" *ngIf="verificationEmailSentNow">kirim ulang dalam {{timeLeft}} detik</ion-label>
+              </ion-col>
+            </ion-row>
+          </ion-item>
+        </ion-item-group>
+        <ion-item lines="none" *ngIf="profileTypeId === 1">
+          <ion-label class="label"><b>Password</b></ion-label>
+        </ion-item>
+        <ion-item *ngIf="profileTypeId === 1">
+          <ion-label position="floating" class="small">Password Lama</ion-label>
+          <ion-input name="old-password" type="password" clear-on-edit=true [value]="" [(ngModel)]="oldPassword">
+          </ion-input>
+        </ion-item>
+        <ion-row *ngIf="profileTypeId === 1" class="password">
+          <ion-col size-xs="12" size-sm="12" size-md="4" size-lg="4" size-xl="4">
+            <ion-item>
+              <ion-label position="floating" class="small">Password Baru</ion-label>
+              <ion-input name="new-password" type="password" clear-on-edit=true [value]="" [(ngModel)]="password"
+                (ionChange)="analyze($event)"></ion-input>
+            </ion-item>
+          </ion-col>
+          <ion-col size-xs="12" size-sm="12" size-md="4" size-lg="4" size-xl="4">
+            <ion-item>
+              <ion-label position="floating" class="small">Konfirmasi Password Baru</ion-label>
+              <ion-input name="new-password" type="password" clear-on-edit=true [value]=""
+                [(ngModel)]="confirmPassword"></ion-input>
+            </ion-item>
+          </ion-col>
+          <ion-col class="ion-align-self-end" size-xs="12" size-sm="12" size-md="4" size-lg="4" size-xl="4">
+            <div class="password-edit-button">
+              <ion-button size="small" (click)="updatePassword()">
+                <ion-label class="label" color="white">Ubah Password</ion-label>
+              </ion-button>
+            </div>
+          </ion-col>
+        </ion-row>
+        <ion-item lines="none" *ngIf="passwordStrength != ''">
+          <ion-text [style.color]="passwordStrengthColor" class="passwordStrengthText">
+            <p>{{ passwordStrength }}</p>
+          </ion-text>
+          <div [style.background-color]="passwordStrengthColor" [style.height]="passwordStrengthBarHeight"
+            [style.width]="passwordStrengthBarWidth"></div>
+        </ion-item>
+        <ion-item *ngIf="isInvalidPassword">
+          <p class="error-msg">Password should have atleast 1 Capital Letter, 1 Number, 1 Special Character and Max.
+            length 15 characters</p>
+        </ion-item>
+        <ion-item *ngIf="isInvalidConfirmPassword">
+          <p class="error-msg">Password and confirm password should match</p>
+        </ion-item>
+        <ion-item *ngIf="isSamePassword">
+          <p class="error-msg">Old Password and New Password should not be same</p>
+        </ion-item>
+        <ion-item *ngIf="isReAuthenticationError">
+          <p class="error-msg">{{ reAuthenticationErrorMessage }}</p>
+        </ion-item>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>

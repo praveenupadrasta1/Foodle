@@ -1,0 +1,143 @@
+$font-family: 'Roboto';
+$toolbar-icon-height: 24px;
+$toolbar-icon-width: 24px;
+$toolbar-icon-padding: 10px;
+
+ion-icon {
+    width: $toolbar-icon-width;
+    height: $toolbar-icon-height;
+    padding: $toolbar-icon-padding;
+    color: white;
+}
+
+.unselectable {
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.search,
+.header-filter {
+    @media (min-width: 500px) {
+        visibility: hidden;
+    }
+
+    @media (max-width: 500px) {
+        visibility: visible;
+    }
+}
+
+@media (min-width: 500px) {
+    .parent-container {
+        visibility: visible;
+        font-family: $font-family;
+        width: 90%;
+        position: fixed;
+        z-index: 999;
+        margin: auto;
+        left: 0;
+        right: 0;
+        padding: 10px;
+
+        ion-col {
+            padding-right: 15px;
+
+            .filter {
+                text-align: center;
+                width: 90%;
+            }
+
+            ion-item {
+                ion-label {
+                    font-family: $font-family;
+                }
+
+                ion-select-option {
+                    font-family: $font-family;
+                }
+            }
+        }
+    }
+
+    .spacer {
+        margin-top: 80px;
+        visibility: visible;
+    }
+}
+
+@media (max-width: 500px) {
+    .parent-container {
+        visibility: hidden;
+        width: 90%;
+        position: fixed;
+        z-index: 999;
+        margin: auto;
+        left: 0;
+        right: 0;
+        padding: 10px;
+    }
+
+    .spacer {
+        visibility: hidden;
+    }
+}
+
+ion-footer {
+    background: var(--ion-color-light);
+
+    &.footer-md::before {
+        background-image: none;
+    }
+}
+
+.img-no-data-available {
+    display: block;
+    text-align: center;
+
+    @media (max-width: 400px) {
+        img {
+            width: 400px;
+            height: 400px;
+        }
+    }
+
+    @media (min-width: 400px) {
+        img {
+            width: 500px;
+            height: 500px;
+        }
+    }
+}
+
+.btn-container {
+    text-align: center;
+    margin: 2%;
+
+    @media (max-width: 400px) {
+        ion-button {
+            text-transform: none !important;
+            color: white;
+            font-size: small;
+            font-family: $font-family;
+
+            ion-icon {
+                padding-right: 5px;
+            }
+        }
+    }
+
+    @media (min-width: 400px) {
+        ion-button {
+            text-transform: none !important;
+            color: white;
+            font-size: medium;
+            font-family: $font-family;
+
+            ion-icon {
+                padding-right: 5px;
+            }
+        }
+    }
+}

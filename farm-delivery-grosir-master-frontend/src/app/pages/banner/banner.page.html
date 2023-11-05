@@ -1,0 +1,21 @@
+<!-- <ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button text="" icon="chevron-back-outline" color="white"></ion-back-button>
+    </ion-buttons>
+    <ion-title color="white">Foodle</ion-title>
+  </ion-toolbar>
+</ion-header> -->
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="home" text="" icon="chevron-back-outline" color="white"></ion-back-button>
+    </ion-buttons>
+    <ion-img class="logo" src="../../../assets/foodle-logo.png"></ion-img>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-img class="banner-image" [ngStyle]="{'background-image': 'url(' + banner.images[imgUrl] + ')'}"></ion-img>
+  <div [innerHTML]="htmlStr"></div>
+</ion-content>

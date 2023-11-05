@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <title>Foodle</title>
+  <base href="/" />
+  <meta name="color-scheme" content="light dark" />
+  <link rel="icon" type="image/png" href="./assets/icon/favicon.png" />
+  <style>
+      .background{
+        background: url("assets/foodle-abstract-bg.png") no-repeat fixed center;
+        background-color: #cccccc;
+        background-size: cover;
+      }
+
+      .painadiv {
+         height: 100%; width:100%; display: table;  overflow-y: auto ; 
+      }
+
+      .kindadiv {
+        display: table-cell;
+        vertical-align: middle;
+        text-align:center
+      }
+
+      .center{
+          text-align: center;
+      }
+
+      .top-margin{
+          margin-top: 5%;
+      }
+
+      .lg-txt-size{
+          font-size: 72pt;
+      }
+
+      .md-txt-size{
+          font-size: 48pt;
+      }
+
+      .sm-txt-size{
+          font-size: 32pt;
+      }
+
+      .txt-white{
+          color:white;
+      }
+
+      .font-comic-sans-ms{
+          font-family: "Comic Sans MS", "Comic Sans", cursive;
+      }
+
+        section {
+                color: #fff;
+                margin: 0 auto;
+                line-height: 24px;
+                font-size: 1rem;
+                font-weight: 700;
+            }
+
+        section ul {
+                    list-style-type: none;
+                    margin-bottom: 0;
+                    margin-left: 0;
+        }
+
+        section ul li{
+                        display: inline-block;
+                        margin-right: 2rem;
+        }
+
+        section .timenumbers {
+                    display: block;
+                    font-size: 38pt;
+                    font-weight: 400;
+                    line-height: 1.5rem;
+                    margin: 20px auto;
+                    text-align: center;
+                }
+
+        section p.timedescription {
+            font-size: 42pt;
+            font-variant: small-caps;
+            line-height: 1.5rem;
+            margin: 20px auto;
+            text-align: center;
+            position: relative;
+            top: 0px;
+        }
+  </style>
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+  <script>
+                (function($) {
+                $.fn.countdown = function(options, callback) {
+                    //custom 'this' selector
+                    thisEl = $(this);
+
+                    // array of custom settings
+                    var settings = {
+                        'date': null,
+                        'format': null
+                    };
+
+                    // append the settings array to options
+                    if (options) {
+                        $.extend(settings, options);
+                    }
+
+                    //create the countdown processing function
+                    function countdown_proc() {
+                        var eventDate = Date.parse(settings.date) / 1000;
+                        var currentDate = Math.floor($.now() / 1000);
+
+                        if (eventDate <= currentDate) {
+                            callback.call(this);
+                            clearInterval(interval);
+                        }
+
+                        var seconds = eventDate - currentDate;
+
+                        var days = Math.floor(seconds / (60 * 60 * 24));
+                        //calculate the number of days
+
+                        seconds -= days * 60 * 60 * 24;
+                        //update the seconds variable with number of days removed
+
+                        var hours = Math.floor(seconds / (60 * 60));
+                        seconds -= hours * 60 * 60;
+                        //update the seconds variable with number of hours removed
+
+                        var minutes = Math.floor(seconds / 60);
+                        seconds -= minutes * 60;
+                        //update the seconds variable with number of minutes removed
+
+                        //conditional statements
+                        if (days == 1) { thisEl.find(".timeRefDays").text("day"); } else { thisEl.find(".timeRefDays").text("days"); }
+                        if (hours == 1) { thisEl.find(".timeRefHours").text("hour"); } else { thisEl.find(".timeRefHours").text("hours"); }
+                        if (minutes == 1) { thisEl.find(".timeRefMinutes").text("minute"); } else { thisEl.find(".timeRefMinutes").text("minutes"); }
+                        if (seconds == 1) { thisEl.find(".timeRefSeconds").text("second"); } else { thisEl.find(".timeRefSeconds").text("seconds"); }
+
+                        //logic for the two_digits ON setting
+                        if (settings.format == "on") {
+                            days = (String(days).length >= 2) ? days : "0" + days;
+                            hours = (String(hours).length >= 2) ? hours : "0" + hours;
+                            minutes = (String(minutes).length >= 2) ? minutes : "0" + minutes;
+                            seconds = (String(seconds).length >= 2) ? seconds : "0" + seconds;
+                        }
+
+                        //update the countdown's html values.
+                        
+                        $(".days").text(days);
+                        $(".hours").text(hours);
+                        $(".minutes").text(minutes);
+                        $(".seconds").text(seconds);
+                    }
+
+                    //run the function
+                    countdown_proc();
+
+                    //loop the function
+                    interval = setInterval(countdown_proc, 1000);
+                };
+
+            })(jQuery);
+
+
+
+            //Provide the plugin settings
+            $("#countdown").countdown({
+                    //The countdown end date
+                    date: "26 October 2020 12:30:00",
+
+                    // on (03:07:52) | off (3:7:52) - two_digits set to ON maintains layout consistency
+                    format: "on"
+                },
+
+                function() {
+                    // This will run when the countdown ends
+                    // alert("We're Out Now");
+                    window.reload();
+                });
+
+
+            function setHeights() {
+                var windowHeight = $(window).height();
+                $('.slide').height(windowHeight);
+            }
+
+            setHeights();
+
+            $(window).resize(function() {
+                setHeights();
+            });
+
+            function addSticky() {
+                $('.slide').each(function() {
+                    var scrollerAnchor = $(this).offset().top;
+                    if (window.scrollY >= scrollerAnchor) {
+                        $(this).addClass('fix-it');
+                    } else {
+                        $(this).removeClass('fix-it');
+                    }
+                });
+            }
+
+            $(window).scroll(function() {
+                addSticky();
+            });
+  </script>
+</head>
+
+<body class="background">
+    <div class="painadiv">
+        <div class="kindadiv">
+            <div class="center top-margin">
+                <img src="assets/logo-white-color.png" width="300" height="100">
+            </div>
+            <div class="center top-margin">
+                <span class="center top-margin lg-txt-size txt-white font-comic-sans-ms">Coming Soon!!!</span>
+            </div>
+            <div class="center top-margin">
+                <span class="center top-margin sm-txt-size txt-white font-comic-sans-ms">Kami akan segera meluncurkannya</span>
+            </div>
+            <div class="center">
+                <span class="center top-margin sm-txt-size txt-white font-comic-sans-ms">Stay tuned!!!</span>
+            </div>
+            <div class="center top-margin">
+                <section>
+                    <ul id="countdown">
+                    <li><span class="days timenumbers">01</span>
+                        <p class="timeRefDays timedescription">hari</p>
+                    </li>
+                    <li><span class="hours timenumbers">00</span>
+                        <p class="timeRefHours timedescription">jam</p>
+                    </li>
+                    <li><span class="minutes timenumbers">00</span>
+                        <p class="timeRefMinutes timedescription">menit</p>
+                    </li>
+                    <li><span class="seconds timenumbers yellow-text">00</span>
+                        <p class="timeRefSeconds timedescription">detik</p>
+                    </li>
+                    </ul>
+                </section>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

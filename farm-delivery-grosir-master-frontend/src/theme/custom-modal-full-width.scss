@@ -1,0 +1,119 @@
+.edit-modal .modal-wrapper {
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  @media(min-width:768px){
+    --width: 60%;
+    --height: 60%;
+  }
+  @media(min-width:500px) and (max-width: 768px){
+    --width: 80%;
+    --height: 80%;
+  }
+  @media(max-width: 500px){
+    --width: 100%;
+    --height: 90%;
+    position: absolute;
+    bottom: 0;
+  }
+}
+
+.sc-ion-modal-md-h, .sc-ion-modal-ios {
+  --backdrop-opacity: var(--ion-backdrop-opacity, 0.4);
+}
+
+.select-delivery-modal .modal-wrapper {
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  @media(min-width:768px){
+    --width: 60%;
+    --height: 60%;
+  }
+  @media(min-width:500px) and (max-width: 768px){
+    --width: 80%;
+    --height: 80%;
+  }
+  @media(max-width: 500px){
+    --width: 100%;
+    --height: 90%;
+    position: absolute;
+    bottom: 0;
+  }
+}
+
+.cart-modal .modal-wrapper {
+  --width: 100%;
+  --height: 90%;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  position: absolute;
+  bottom: 0;
+}
+
+// .sc-ion-modal-md-h{
+//   --border-radius: 20px;
+// }
+
+.auth-modal .modal-wrapper{
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  @media(min-width:768px){
+    --width: 60%;
+    --height: 50%;
+  }
+  @media(min-width:500px) and (max-width: 768px){
+    --width: 100%;
+    --height: 60%;
+    position: absolute;
+    bottom: 0;
+  }
+  @media(max-width: 500px){
+    --width: 100%;
+    --height: 50%;
+    position: absolute;
+    bottom: 0;
+  }
+}
+
+.sm-modal{
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  @media(min-width:768px){
+    --width: 50%;
+    --height: 25%;
+  }
+  @media(min-width:500px) and (max-width: 768px){
+    --width: 100%;
+    --height: 40%;
+    position: absolute;
+    bottom: 0;
+  }
+  @media(max-width: 500px){
+    --width: 100%;
+    --height: 50%;
+    position: absolute;
+    bottom: 0;
+  }
+}
+
+.loading {
+  // background: url('assets/foodle-animated.gif');
+  // background-image: url('assets/foodle-animated.gif');
+  // --background: transparent;
+	ion-backdrop {
+		background-color: #fff;
+		opacity: .9 !important;
+	}
+  .loading-wrapper {
+		// -webkit-animation: ld-vortex-out 2s ease-out infinite;
+		// animation: ld-vortex-out 2s ease-out infinite;
+		// animation-timing-function: cubic-bezier(0.05, 0, 3, 0.05);
+		background-image:  url('assets/foodle-animated.gif');
+		background-size: contain;
+		background-position: center center;
+		background-repeat: no-repeat;
+		min-width: 150px;
+		min-height: 100px;
+		box-shadow: none;
+		-webkit-box-shadow: none;
+	}
+}

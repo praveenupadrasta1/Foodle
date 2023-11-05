@@ -1,0 +1,296 @@
+@import '../../../theme/colors.scss';
+
+$font-family: "Roboto";
+
+.register-left {
+    @media(min-width: 769px) {
+        --background: #000 url('../../../assets/register-page.jpg') no-repeat center center / cover;
+    }
+}
+
+.register-right {
+    @media(max-width: 769px) {
+        --background: #000 url('../../../assets/register-page.jpg') no-repeat center center / cover;
+    }
+
+    @media(min-width: 769px) {
+        --background: #fff;
+    }
+}
+
+p, h1{
+    font-family: $font-family;
+}
+
+.underline {
+    text-decoration: underline;
+}
+
+ion-content{
+    font-family: $font-family;
+}
+
+.terms-agreement {
+    margin-top: 10px;
+    font-size: small;
+    font-family: $font-family;
+}
+
+.home-logo {
+    --size: 75px;
+    position: absolute;
+    top: -10%;
+    z-index: 10;
+    left: 40%;
+    cursor: pointer;
+
+    img {
+        box-shadow: 0px 3px gray;
+    }
+}
+
+.form-input-label {
+    margin-bottom: 3px;
+    font-family: $font-family;
+}
+
+
+.split {
+    height: 100%;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    overflow-x: hidden;
+    padding-top: 20px;
+}
+
+.left {
+    left: 0;
+
+    @media(min-width: 769px) {
+        width: 60%;
+    }
+}
+
+.right {
+    right: 0;
+
+    // --background: #fff;
+    @media(min-width: 769px) {
+        width: 40%;
+    }
+}
+
+.centered {
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-transform: none;
+    text-align: left;
+    max-height: 80%;
+
+    @media(min-width: 1050px) {
+        max-width: 80%;
+    }
+
+    @media(max-width: 1050px) {
+        max-width: 99%;
+    }
+}
+
+.centered img {
+    width: 150px;
+    border-radius: 50%;
+}
+
+//   ion-card-content{
+//       font-size: 14pt;
+//       text-align: left;
+//       padding-left: 5px;
+//       padding-right: 5px;
+//   }
+
+.subtitle {
+    font-size: 8px;
+    font-family: $font-family;
+}
+
+ion-card-subtitle {
+    text-transform: none;
+    font-family: $font-family;
+}
+
+.register-form {
+    &.item-has-focus {
+        --background: rgb(224, 224, 224);
+    }
+}
+
+.name-item {
+    --color-focused: #fff !important;
+    --highlight-color-focused: #fff !important;
+    --background-focused: #fff;
+    --background: rgb(255, 255, 255);
+
+    .first-item {
+        margin-right: 5px;
+        width: 50%;
+    }
+}
+
+.form-item-icon {
+    padding-left: 0px;
+    padding-right: 10px;
+    font-size: 14pt;
+}
+
+.text {
+    text-align: center;
+    width: 100%;
+    text-align: center;
+    border-bottom: 1px solid #dddee6;
+    line-height: .1em;
+    margin: 32px 0;
+    margin-top: 32px;
+    margin-right: 0px;
+    margin-bottom: 32px;
+    margin-left: 0px;
+    font-family: $font-family;
+
+    ion-text {
+        background: #fff;
+        color: #9295a6;
+        font-size: 12px;
+        padding: 0 10px;
+        font-family: $font-family;
+    }
+}
+
+ion-item {
+    .error-msg {
+        font-size: 0.8em;
+        color: #b1b1b1;
+        font-family: $font-family;
+    }
+}
+
+.invalid {
+    border: 1px solid var(--ion-color-darkorange);
+}
+
+.register-form:hover {
+    border-bottom: 1px solid #7476d8;
+}
+
+ion-card-content {
+    padding-left: 5px;
+    padding-right: 5px;
+
+    .last-item {
+        margin-bottom: 10px !important;
+    }
+
+    .google-button {
+        text-align: center;
+
+        ion-button {
+            text-transform: none;
+            --background: #4285F4 !important;
+            --color: white;
+            font-family: $font-family;
+
+            ion-icon {
+                padding-right: 10px;
+            }
+        }
+    }
+
+    .passwordStrengthText {
+        margin-right: 30px;
+    }
+
+    @media(max-width:350px) {
+        .register-form .passwordStrengthText {
+            font-size: 10pt;
+        }
+
+        .submit-button {
+            text-align: center;
+
+            ion-button {
+                text-transform: none;
+                --color: white;
+                font-family: $font-family;
+            }
+        }
+    }
+
+    @media(min-width:350px) and (max-width: 470px) {
+        .register-form .passwordStrengthText {
+            font-size: 10pt;
+        }
+
+        .submit-button {
+            text-align: center;
+
+            ion-button {
+                width: 30%;
+                text-transform: none;
+                --color: white;
+                font-family: $font-family;
+            }
+        }
+    }
+
+    @media(min-width:470px) and (max-width: 768px) {
+        .register-form .passwordStrengthText {
+            font-size: 11pt;
+        }
+
+        .submit-button {
+            text-align: center;
+
+            ion-button {
+                width: 30%;
+                text-transform: none;
+                --color: white;
+                font-family: $font-family;
+            }
+        }
+    }
+
+    @media(min-width:768px) and (max-width: 1000px) {
+        .register-form .passwordStrengthText {
+            font-size: 12pt;
+        }
+
+        .submit-button {
+            text-align: center;
+
+            ion-button {
+                width: 30%;
+                text-transform: none;
+                --color: white;
+                font-family: $font-family;
+            }
+        }
+    }
+
+    @media(min-width:1000px) {
+        .register-form .passwordStrengthText {
+            font-size: initial;
+        }
+
+        .submit-button {
+            text-align: center;
+
+            ion-button {
+                width: 30%;
+                text-transform: none;
+                --color: white;
+                font-family: $font-family;
+            }
+        }
+    }
+}

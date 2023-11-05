@@ -1,0 +1,105 @@
+<ion-content when="md" class="register-left split left">
+</ion-content>
+<ion-content class="register-right split right">
+  <div class="centered">
+    <ion-thumbnail class="home-logo" (click)='goHome()'>
+      <img src="../../../assets/icon/favicon.png" />
+    </ion-thumbnail>
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>
+          <h1>
+            Daftar di Foodle
+          </h1>
+        </ion-card-title>
+        <ion-card-subtitle>Sudah memiliki akun? <a href="/login">Masuk</a>
+        </ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-slides pager="false" [options]="slideOpts">
+          <ion-slide>
+            <form [formGroup]="registerForm" autocomplete="off">
+              <ion-item
+                [class.invalid]="!registerForm.controls.firstName.valid && (registerForm.controls.firstName.dirty || submitAttempt)"
+                class="register-form first-item">
+                <ion-label position="floating" class="form-input-label">Nama depan</ion-label>
+                <ion-input type="text" formControlName="firstName" autocomplete="given-name" clear-input="true">
+                </ion-input>
+              </ion-item>
+              <ion-item
+                [class.invalid]="!registerForm.controls.lastName.valid && (registerForm.controls.lastName.dirty || submitAttempt)"
+                class="register-form first-item">
+                <ion-label position="floating" class="form-input-label">Nama belakang</ion-label>
+                <ion-input type="text" formControlName="lastName" clear-input="true"></ion-input>
+              </ion-item>
+              <ion-item lines="none"
+                *ngIf="(!registerForm.controls.firstName.valid && (registerForm.controls.firstName.dirty || submitAttempt)) || (!registerForm.controls.lastName.valid && (registerForm.controls.lastName.dirty || submitAttempt)) ">
+                <p class="error-msg">Harap masukkan nama yang valid.</p>
+              </ion-item>
+              <ion-item
+                [class.invalid]="!registerForm.controls.emailAddress.valid && (registerForm.controls.emailAddress.dirty || submitAttempt)"
+                class="register-form">
+                <ion-label position="floating" class="form-input-label">Alamat Email</ion-label>
+                <ion-input type="email" formControlName="emailAddress" clear-input="true"></ion-input>
+                <ion-icon name="mail" class="form-item-icon ion-align-self-center" slot="start"></ion-icon>
+              </ion-item>
+              <ion-item lines="none"
+                *ngIf="!registerForm.controls.emailAddress.valid && (registerForm.controls.emailAddress.dirty || submitAttempt)">
+                <p class="error-msg">Silakan isi alamat email.</p>
+              </ion-item>
+              <ion-item class="register-form last-item"
+                [class.invalid]="!registerForm.controls.password.valid && (registerForm.controls.password.dirty || submitAttempt)">
+                <ion-label position="floating" class="form-input-label">Password</ion-label>
+                <ion-input formControlName="password" [type]="passwordType" clearOnEdit="false"
+                  (ionChange)="analyze($event)"></ion-input>
+                <ion-icon name="lock-closed" class="form-item-icon ion-align-self-center" slot="start"></ion-icon>
+                <ion-icon item-end [name]="passwordIcon" class="passwordIcon ion-align-self-end" slot="end"
+                  (click)='hideShowPassword()'></ion-icon>
+              </ion-item>
+              <ion-item lines="none"
+                *ngIf="!registerForm.controls.password.valid && (registerForm.controls.password.dirty || submitAttempt)">
+                <p class="error-msg">Kata sandi harus terdiri dari minimal 1 Huruf Kapital, 1 Angka, 1 Karakter Khusus
+                  dan
+                  Maks. panjang 15 karakter</p>
+              </ion-item>
+              <ion-item lines="none" *ngIf="passwordStrength != ''">
+                <ion-text [style.color]="passwordStrengthColor" class="passwordStrengthText">
+                  <p>{{passwordStrength}}</p>
+                </ion-text>
+                <div [style.background-color]="passwordStrengthColor" [style.height]="passwordStrengthBarHeight"
+                  [style.width]="passwordStrengthBarWidth"></div>
+              </ion-item>
+              <ion-item lines="none" *ngIf="registrationError">
+                <p class="error-msg">{{ registrationErrorMessage }}</p>
+              </ion-item>
+              <div class="submit-button">
+                <ion-button size="default" type="submit" (click)="registerUser()">
+                  <ion-label>Daftar</ion-label>
+                </ion-button>
+              </div>
+              <div class="text">
+                <ion-text>atau</ion-text>
+              </div>
+              <div class="google-button" color="red">
+                <ion-button size="default" (click)="googleLogin()">
+                  <ion-icon name="logo-google" color="white"></ion-icon>
+                  <ion-label>Lanjutkan Dengan Google</ion-label>
+                </ion-button>
+              </div>
+              <ion-item class="terms-agreement" lines="none">
+                <ion-note>Dengan melanjutkan, Anda menyatakan bahwa Anda menerima <a
+                    href="/terms-of-service">Persyaratan Layanan
+                </a> dan <a href="/privacy-policy">Kebijakan Privasi</a> kami.</ion-note>
+              </ion-item>
+            </form>
+          </ion-slide>
+          <ion-slide>
+            <ion-label>
+              {{ emailVerificationText }}
+            </ion-label>
+          </ion-slide>
+        </ion-slides>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>

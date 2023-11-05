@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="home" text="" icon="chevron-back-outline" color="white"></ion-back-button>
+    </ion-buttons>
+    <!-- <ion-title color="white" class="unselectable">Search</ion-title> -->
+    <ion-searchbar id="search-global" #key placeholder="Cari produk disini" (keyup.enter)="searchProduct(key.value)"
+      animated></ion-searchbar>
+    <!-- <div (click)="isSearchbarToggled=true" *ngIf="!isSearchbarToggled" slot="end" tappable>
+      <ion-icon name="search-sharp" color="white"></ion-icon> -->
+    <!-- </div> -->
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="light" class="unselectable">
+
+  <div *ngIf="searchedKeys.length > 0">
+    <ion-card class="chips-previous-search">
+      <ion-item-divider>
+        <ion-card-title class="heading">Pencarian Terakhir</ion-card-title>
+      </ion-item-divider>
+      <ion-chip *ngFor="let key of searchedKeys" (click)="searchProduct(key)">
+        <ion-label>{{key}}</ion-label>
+      </ion-chip>
+    </ion-card>
+  </div>
+
+  <div *ngIf="categories.length > 0">
+    <ion-card class="chips-category">
+      <ion-item-divider>
+        <ion-card-title class="heading">Pencarian Berdasarkan Kategori</ion-card-title>
+      </ion-item-divider>
+      <ion-chip *ngFor="let category of categories" (click)="openProductsPage(category.name, category.id)">
+        <ion-label>{{category.name}}</ion-label>
+      </ion-chip>
+    </ion-card>
+  </div>
+</ion-content>

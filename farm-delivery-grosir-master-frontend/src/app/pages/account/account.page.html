@@ -1,0 +1,41 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="home" text="" icon="chevron-back-outline" color="white"></ion-back-button>
+    </ion-buttons>
+    <ion-title color="white" class="unselectable">Akun</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-tabs>
+    <ion-tab-bar slot="top">
+      <ion-tab-button *ngFor='let p of pages' [tab]="p.page" [class.active-item]="selectedPath === p.url">
+        <ion-icon [name]="p.icon"></ion-icon>
+        <ion-label>{{ p.title }}</ion-label>
+      </ion-tab-button>
+    </ion-tab-bar>
+  </ion-tabs>
+</ion-content>
+<!-- <ion-content *ngIf="isBigScreen" class="split-pane-hide-md">
+  <ion-split-pane when="md" content-id="accountpage">
+    <ion-menu content-id="accountpage">
+      <ion-list class="menu-list" lines="none">
+        <ion-item class="item" button [routerLink]="['/account/MyAccount']"><ion-icon class="icon-item" name="person-sharp"></ion-icon><ion-label>My Account</ion-label></ion-item>
+        <ion-item class="item" button><ion-icon class="icon-item" name="list-circle-sharp"></ion-icon><ion-label>My Orders</ion-label></ion-item>
+        <ion-item class="item" button><ion-icon class="icon-item" name="settings-sharp"></ion-icon><ion-label>Settings</ion-label></ion-item>
+      </ion-list> -->
+<!-- <ion-content>
+        <ion-list>
+          <ion-menu-toggle auto-hide="false" *ngFor="let p of pages">
+            <ion-item [routerLink]="p.url" routerDirection="root" [class.active-item]="selectedPath === p.url">
+              <ion-icon class="icon-item" [name]="p.icon" [color]="p.color"></ion-icon>
+              <ion-label [color]="p.color">{{ p.title }}</ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+        </ion-list>
+      </ion-content>
+    </ion-menu>
+    <ion-router-outlet id="accountpage" name="primary"></ion-router-outlet>
+  </ion-split-pane>
+</ion-content> -->

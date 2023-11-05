@@ -1,0 +1,377 @@
+$font-family: "Roboto";
+
+ion-label {
+    white-space: pre-line !important;
+    font-family: $font-family;
+}
+
+p {
+    font-family: $font-family;
+}
+
+ion-item {
+    display: flex;
+    flex-wrap: wrap;
+    font-family: $font-family;
+}
+
+ion-title {
+    margin-top: 10px;
+    font-weight: bold;
+    font-family: $font-family;
+}
+
+.google-logo {
+    color: darkblue;
+}
+
+.checked {
+    color:  green;
+}
+
+.not-checked{
+    color: red;
+}
+
+ion-card-content {
+    padding: 5px;
+    font-family: $font-family;
+
+    .value-label {
+        font-weight: bold;
+    }
+
+    // .fixed-label{
+    //     min-width: 20% !important;
+    //     max-width: 20% !important;
+    // }
+
+    .input-field {
+        max-width: 100%;
+        background-color: var(--ion-color-light);
+    }
+
+    .display-label {
+        max-width: fit-content;
+    }
+
+    .password-input-field {
+        max-width: fit-content;
+        background-color: var(--ion-color-light);
+        border-bottom: 1px solid rgba(255, 0, 0, 0.71);
+        margin-left: 15px;
+        margin-right: 15px;
+    }
+
+    .hover-label {
+        background: #fff;
+        bottom: 42px;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        color: #746464;
+        font-size: 11px;
+        font-weight: 400;
+        left: 8px;
+        /* max-width: -webkit-calc(100% - (2*8px)); */
+
+        @media(max-width: 768px) {
+            max-width: 50%;
+        }
+
+        @media(min-width:768px) {
+            max-width: max-content;
+        }
+
+        display:block;
+        overflow: hidden;
+        padding: 0 8px;
+        text-overflow: ellipsis;
+        -webkit-transition: transform 150ms cubic-bezier(0.4, 0, 0.2, 1),
+        opacity 150ms cubic-bezier(0.4, 0, 0.2, 1) !important;
+        transition: transform 150ms cubic-bezier(0.4, 0, 0.2, 1),
+        opacity 150ms cubic-bezier(0.4, 0, 0.2, 1) !important;
+        white-space: nowrap;
+        width: auto;
+        z-index: 3;
+    }
+
+    .inputfield-label {
+        -webkit-transform-origin: bottom left;
+        transform-origin: bottom left;
+        -webkit-transition: all .3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+        transition: all .3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+        -webkit-transition-property: color, bottom, transform;
+        transition-property: color, bottom, transform;
+        font: 400 11px Roboto, RobotoDraft, Helvetica, Arial, sans-serif;
+        pointer-events: none;
+        position: absolute;
+        left: 24px;
+        width: 100%;
+    }
+}
+
+ion-item {
+    .error-msg {
+        font-size: 0.8em;
+        color: #b1b1b1;
+    }
+}
+
+ion-row {
+    width: 99%;
+}
+
+@media(max-width:350px) {
+    ion-card-content {
+        .label {
+            font-size: 10pt;
+            text-transform: none;
+        }
+
+        .edit-button {
+            text-align: center;
+            margin-left: 2%;
+        }
+    }
+
+    .centered {
+        max-width: auto;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .password {
+        ion-col {
+            flex: 0 0 calc(calc(12 / var(--ion-grid-columns, 12)) * 100%);
+            width: calc(calc(12 / var(--ion-grid-columns, 12)) * 100%);
+            max-width: calc(calc(12 / var(--ion-grid-columns, 12)) * 100%);
+            margin-top: 20px;
+        }
+    }
+
+    // .name{
+    // ion-col{
+    //     flex: 0 0 calc(calc(6 / var(--ion-grid-columns, 12)) * 100%);
+    //     width: calc(calc(6 / var(--ion-grid-columns, 12)) * 100%);
+    //     max-width: calc(calc(6 / var(--ion-grid-columns, 12)) * 100%);
+    //     margin-top: 5px;
+    // }       
+}
+
+@media(min-width:350px) and (max-width: 470px) {
+    ion-card-content {
+        .label {
+            font-size: 10pt;
+            text-transform: none;
+            font-family: $font-family;
+        }
+
+        .edit-button {
+            text-align: center;
+            margin-left: 3%;
+            font-family: $font-family;
+        }
+    }
+
+    .centered {
+        max-width: auto;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .password {
+        ion-col {
+            flex: 0 0 calc(calc(12 / var(--ion-grid-columns, 12)) * 100%);
+            width: calc(calc(12 / var(--ion-grid-columns, 12)) * 100%);
+            max-width: calc(calc(12 / var(--ion-grid-columns, 12)) * 100%);
+            margin-top: 20px;
+        }
+    }
+}
+
+@media(min-width:470px) and (max-width: 768px) {
+    ion-card-content {
+        .label {
+            font-size: 11pt;
+            text-transform: none;
+        }
+
+        .edit-button {
+            margin-left: 4%;
+        }
+    }
+
+    .centered {
+        max-width: 80%;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .password {
+        ion-col {
+            flex: 0 0 calc(calc(12 / var(--ion-grid-columns, 12)) * 100%);
+            width: calc(calc(12 / var(--ion-grid-columns, 12)) * 100%);
+            max-width: calc(calc(12 / var(--ion-grid-columns, 12)) * 100%);
+            margin-top: 20px;
+        }
+    }
+}
+
+@media(min-width:768px) and (max-width: 1000px) {
+    ion-card-content {
+        .label {
+            font-size: 12pt;
+            text-transform: none;
+        }
+
+        .edit-button {
+            margin-left: 4%;
+            font-family: $font-family;
+        }
+    }
+
+    .centered {
+        max-width: 80%;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .password {
+        ion-col {
+            flex: 0 0 calc(calc(12 / var(--ion-grid-columns, 12)) * 100%);
+            width: calc(calc(12 / var(--ion-grid-columns, 12)) * 100%);
+            max-width: calc(calc(12 / var(--ion-grid-columns, 12)) * 100%);
+            margin-top: 20px;
+        }
+    }
+}
+
+@media(min-width:768px) and (max-width: 1000px) {
+    ion-card-content {
+        .label {
+            font-size: 12pt;
+            text-transform: none;
+            font-family: $font-family;
+        }
+
+        .edit-button {
+            margin-left: 4%;
+            font-family: $font-family;
+        }
+
+        .timer{
+            margin-left:30px;
+        }
+    }
+
+    .centered {
+        max-width: 80%;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .password {
+        ion-col {
+            flex: 0 0 calc(calc(4 / var(--ion-grid-columns, 12)) * 100%);
+            width: calc(calc(4 / var(--ion-grid-columns, 12)) * 100%);
+            max-width: calc(calc(4 / var(--ion-grid-columns, 12)) * 100%);
+        }
+    }
+}
+
+@media(min-width:1000px) and (max-width:1365px) {
+    ion-card-content {
+        .label {
+            font-size: initial;
+            text-transform: none;
+            font-family: $font-family;
+        }
+
+        .edit-button {
+            margin-left: 5%;
+            font-family: $font-family;
+        }
+        
+        .timer{
+            margin-left:30px;
+        }
+    }
+
+    .centered {
+        max-width: 60%;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .password {
+        ion-col {
+            flex: 0 0 calc(calc(4 / var(--ion-grid-columns, 12)) * 100%);
+            width: calc(calc(4 / var(--ion-grid-columns, 12)) * 100%);
+            max-width: calc(calc(4 / var(--ion-grid-columns, 12)) * 100%);
+        }
+    }
+}
+
+@media(min-width:1366px) {
+    ion-card-content {
+        .label {
+            font-size: initial;
+            text-transform: none;
+            font-family: $font-family;
+        }
+
+        .edit-button {
+            margin-left: 5%;
+            font-family: $font-family;
+        }
+
+        .timer{
+            margin-left:30px;
+        }
+    }
+
+    .centered {
+        max-width: 50%;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .password {
+        ion-col {
+            flex: 0 0 calc(calc(4 / var(--ion-grid-columns, 12)) * 100%);
+            width: calc(calc(4 / var(--ion-grid-columns, 12)) * 100%);
+            max-width: calc(calc(4 / var(--ion-grid-columns, 12)) * 100%);
+        }
+    }
+}
+
+.small {
+    font-size: small;
+}
+
+.centered {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.password {
+    ion-col {
+        flex: 0 0 calc(calc(4 / var(--ion-grid-columns, 12)) * 100%);
+        width: calc(calc(4 / var(--ion-grid-columns, 12)) * 100%);
+        max-width: calc(calc(4 / var(--ion-grid-columns, 12)) * 100%);
+    }
+}
+
+
+// .edit-modal .modal-wrapper{
+//     --height: 60% !important;
+//     --width: 60% !important;
+// }

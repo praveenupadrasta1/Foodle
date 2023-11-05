@@ -1,0 +1,58 @@
+<ion-header>
+  <ion-item>
+    <ion-label color="white">
+      Pilih Alamat Pengiriman
+    </ion-label>
+    <ion-button (click)="closeModal()" color="danger">
+      <ion-icon name="close-circle-sharp" color="white"></ion-icon>
+    </ion-button>
+  </ion-item>
+</ion-header>
+
+<ion-content>
+  <div class="add-new-address-btn-container">
+    <ion-button (click)="openAddShippingAddressModal()" color="darkgreen">
+      Tambah Alamat Baru
+    </ion-button>
+  </div>
+  <ion-list *ngIf="shippingAddresses.length > 0 && !isLoading" class="list-address">
+    <ion-item *ngFor="let address of shippingAddresses; let i=index" lines="none">
+      <ion-card>
+        <ion-button *ngIf="address.city === cityData.city" (click)="onSelectShippingAddress(address)" color="darkorange"
+          class="btn-select">
+          Pilih Alamat
+        </ion-button>
+        <ion-card-content>
+          <div class="content"><b>{{address.first_name}} {{address.last_name}}</b></div>
+          <div class="content">{{address.phone}}</div>
+          <div class="content">{{getAddressLine(address)}} </div>
+          <div class="content">{{address.city}} - {{address.postal_code}}</div>
+          <div class="content">{{address.state_or_province}}</div>
+          <div class="btn-container">
+            <div class="btn-delete">
+              <ion-button (click)="deleteShippingAddress(address, i)" color="danger">
+                Hapus
+              </ion-button>
+            </div>
+            <div class="btn-update">
+              <ion-button (click)="openUpdateShippingAddressModal(address, i)" color="darkgreen">
+                Ubah
+              </ion-button>
+            </div>
+          </div>
+        </ion-card-content>
+      </ion-card>
+    </ion-item>
+  </ion-list>
+  <div *ngIf="shippingAddresses.length == 0 && !isLoading" class="img-container">
+    <ion-img src="../../assets/no-shipping-addresses-available.svg"></ion-img>
+  </div>
+</ion-content>
+
+<!-- <ion-footer>
+  <div class="btn-submit">
+    <ion-button color="darkgreen">
+      Lanjut
+    </ion-button>
+  </div>
+</ion-footer> -->

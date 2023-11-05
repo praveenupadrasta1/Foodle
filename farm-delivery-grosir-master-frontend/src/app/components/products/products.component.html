@@ -1,0 +1,148 @@
+<ion-grid class="grid-products-container" fixed>
+  <div *ngIf="currentCityProducts.length > 0">
+    <ion-row class="parent-row">
+      <ion-col class="col-product" *ngFor="let product of currentCityProducts">
+        <div class="product-container">
+          <div *ngIf="product.variants[0].inventory_level == 0">
+            <ion-badge class="sold-out-badge">Habis!</ion-badge>
+          </div>
+          <ion-card class="product-card"
+            [ngStyle]="product.variants[0].inventory_level == 0? {'opacity': '0.5'} : {'opacity': '1'}">
+            <div class="card-image">
+              <div class="image-container">
+                <img class="image-product" [src]="product.images[0].url_standard">
+              </div>
+              <div class="item-stock" *ngIf="product.variants[0].inventory_level <= product.variants[0].inventory_warning_level &&
+              product.variants[0].inventory_level >= 1">
+                Tersisa {{product.variants[0].inventory_level}}!
+              </div>
+            </div>
+
+            <div class="card-content">
+              <ion-card-title>{{product.name}}</ion-card-title>
+              <div class="description">
+                <p>{{product.description}}</p>
+              </div>
+
+              <div class="sale-price-container">
+                <span
+                  class="span-price">{{product.variants[0].sale_price | currency : "Rp. ":"Rp. ":"1.0" | decimalReplace: ",":"." }}
+                </span>/ {{product.uom}}
+              </div>
+
+              <ion-grid class="grid-market-price" fixed>
+                <ion-row class="row-market-price">
+                  <ion-col class="col-market-price">
+                    <s>
+                      {{product.variants[0].retail_price | currency : "Rp. ":"Rp. ":"1.0" | decimalReplace: ",":"." }}
+                    </s> / {{product.uom}}
+                  </ion-col>
+                  <ion-col class="col-save-badge">
+                    <ion-badge class="save-badge">Save
+                      {{ getSavePercentage(product.variants[0].retail_price, product.variants[0].sale_price) }}%
+                    </ion-badge>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+
+              <ion-button color="darkgreen"
+                [class.button-disabled]="product.variants[0].inventory_level <= 0? true : false"
+                *ngIf="!isProductExistInCart(product.variants[0].id)" (click)="onProductAdd(product)">
+                Tambah
+              </ion-button>
+
+              <ion-row [id]="'container-qty-'+product.variants[0].id"
+                *ngIf="isProductExistInCart(product.variants[0].id)">
+                <ion-col class="col-decrease-button">
+                  <ion-button color="danger"
+                    (click)="onClickDecreaseQty(product.variants[0].id, product.order_quantity_minimum, product.name)">
+                    <ion-icon name="remove-sharp" color="white"></ion-icon>
+                  </ion-button>
+                </ion-col>
+                <ion-col class="col-quantity-label">
+                  <ion-label [id]="'qty-lbl-'+product.variants[0].id">
+                    {{getProductQtyInCart(product.variants[0].id)}}
+                  </ion-label>
+                </ion-col>
+                <ion-col class="col-increase-button">
+                  <ion-button [disabled]="getProductQtyInCart(product.variants[0].id) >= product.variants[0].inventory_level? true : false ||
+                  getProductQtyInCart(product.variants[0].id) >= product.order_quantity_maximum? true : false"
+                    color="darkgreen" (click)="onClickIncreaseQty(product.variants[0].id, product.order_quantity_minimum, 
+                  product.order_quantity_maximum, product.variants[0].inventory_level)">
+                    <ion-icon name="add-sharp" color="white"></ion-icon>
+                  </ion-button>
+                </ion-col>
+              </ion-row>
+
+              <div *ngIf="product.meta_description.discount_info; then thenBlock else elseBlock"></div>
+
+              <ng-template #thenBlock>
+                <div class="discount">
+                  <p>{{product.meta_description.discount_info.currentDeliveryCity.description}}</p>
+                </div>
+              </ng-template>
+
+              <ng-template #elseBlock>
+                <div>
+                  <ion-row>
+                    <ion-col size="12"></ion-col>
+                  </ion-row>
+                  <ion-row>
+                    <ion-col size="12"></ion-col>
+                  </ion-row>
+                </div>
+              </ng-template>
+            </div>
+          </ion-card>
+        </div>
+      </ion-col>
+    </ion-row>
+  </div>
+
+  <div *ngIf="currentCityProducts.length == 0 && isLoading">
+    <ion-row class="parent-row">
+      <ion-col class="col-product" *ngFor="let product of [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]">
+        <div class="product-container">
+          <ion-card class="product-card">
+            <div class="card-image">
+              <div class="image-container">
+                <ion-skeleton-text animated style="width: 100%; height: 200px"></ion-skeleton-text>
+              </div>
+            </div>
+
+            <div class="card-content">
+              <ion-card-title>
+                <ion-skeleton-text animated style="width: 90%; height: 15px"></ion-skeleton-text>
+              </ion-card-title>
+
+              <div class="description">
+                <p>
+                  <ion-skeleton-text animated style="width: 100%; height: 35px"></ion-skeleton-text>
+                </p>
+              </div>
+
+              <div class="sale-price-container">
+                <span class="span-price">
+                  <ion-skeleton-text animated
+                    style="width: 90%; height: 15px; display: block; margin-left: auto; margin-right: auto;">
+                  </ion-skeleton-text>
+                </span>
+              </div>
+
+              <div>
+                <ion-skeleton-text animated
+                  style="width: 80%; height: 25px; display: block; margin-left: auto; margin-right: auto;">
+                </ion-skeleton-text>
+              </div>
+            </div>
+          </ion-card>
+        </div>
+      </ion-col>
+    </ion-row>
+  </div>
+
+  <div class="img-no-data-available" *ngIf="currentCityProducts.length == 0 && !isLoading">
+    <ion-img src="../../../assets/no-products-available.svg">
+    </ion-img>
+  </div>
+</ion-grid>

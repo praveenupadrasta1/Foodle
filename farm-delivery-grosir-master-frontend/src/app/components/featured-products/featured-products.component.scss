@@ -1,0 +1,763 @@
+@import '../../../theme/variables.scss';
+@import '../../../theme/colors.scss';
+
+$font-family: 'Roboto';
+$font-size-micro: 10px;
+
+ion-img {
+    object-fit: cover;
+    max-width: 100%;
+    // max-height: 200px;
+}
+
+ion-card {
+    margin: 5px;
+}
+
+.title-section {
+    font-family: $font-family;
+    font-size: large;
+    font-weight: bold;
+    text-align: center;
+}
+
+ion-card {
+    width: 100%;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+}
+
+.product-container {
+    max-width: 100%;
+}
+
+.col-decrease-button, .col-increase-button, .col-quantity-label{
+    padding-bottom: 0px;
+    padding-top: 0px;
+}
+
+@media (max-width: 350px) {
+    .image-product {
+        object-fit: cover;
+        max-width: 100%;
+        max-height: 200px;
+    }
+
+    .item-stock {
+        background-color: darkgray;
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        padding: 5px 0;
+        color: white;
+        font-family: $font-family;
+        font-size: $font-size-micro;
+        text-align: center !important;
+    }
+
+    .sold-out-badge {
+        position: absolute;
+        z-index: 10;
+        // top: 0;
+        right: 5px;
+        padding: 5px;
+        background-color: var(--ion-color-danger);
+        color: white;
+        font-size: $font-size-micro;
+        font-family: $font-family;
+    }
+
+    ion-card-title {
+        font-size: small;
+        font-weight: bold;
+        margin-left: 5%;
+        margin-top: 5px;
+        text-align: left !important;
+    }
+
+    .description {
+        text-align: left !important;
+        font-size: $font-size-micro;
+        margin-left: 5%;
+        font-family: $font-family;
+        margin-right: 5%;
+        padding-bottom: 10px;
+        height: 60px;
+    }
+
+    .sale-price-container {
+        text-align: left !important;
+        color: darkgreen;
+        font-family: $font-family;
+        font-size: smaller;
+
+        .span-price {
+            margin-left: 5%;
+            font-weight: bold;
+        }
+    }
+
+    .col-market-price {
+        text-align: left !important;
+        font-family: $font-family;
+        font-size: $font-size-micro;
+        display: inline-block;
+        flex: 0 0 calc(calc(12 / var(--ion-grid-columns, 12)) * 100%);
+        width: calc(calc(12 / var(--ion-grid-columns, 12)) * 100%);
+        max-width: calc(calc(12 / var(--ion-grid-columns, 12)) * 100%);
+
+        s {
+            text-align: left !important;
+            color: var(--ion-color-danger);
+            font-weight: bold;
+        }
+    }
+
+    .save-badge {
+        background-color: var(--ion-color-darkorange);
+        color: white;
+        font-size: $font-size-micro;
+        font-family: $font-family;
+        word-wrap: break-word;
+    }
+
+    .col-save-badge {
+        text-align: left;
+        flex: 0 0 calc(calc(12 / var(--ion-grid-columns, 12)) * 100%);
+        width: calc(calc(12 / var(--ion-grid-columns, 12)) * 100%);
+        max-width: calc(calc(12 / var(--ion-grid-columns, 12)) * 100%);
+    }
+
+    .discount {
+        font-size: $font-size-micro;
+        justify-content: center;
+        text-align: center;
+        font-family: $font-family;
+        width: 100%;
+        padding-bottom: 2px;
+        color: white;
+        background-color: var(--ion-color-danger);
+    }
+
+    .col-decrease-button,
+    .col-increase-button {
+        flex: 0 0 calc(calc(5 / var(--ion-grid-columns, 12)) * 100%);
+        width: calc(calc(5 / var(--ion-grid-columns, 12)) * 100%);
+        max-width: calc(calc(5 / var(--ion-grid-columns, 12)) * 100%);
+
+        ion-button {
+            ion-icon {
+                width: 15px;
+                height: 15px;
+            }
+        }
+    }
+
+    .col-quantity-label {
+        flex: 0 0 calc(calc(2 / var(--ion-grid-columns, 12)) * 100%);
+        width: calc(calc(2 / var(--ion-grid-columns, 12)) * 100%);
+        max-width: calc(calc(2 / var(--ion-grid-columns, 12)) * 100%);
+
+        ion-label {
+            font-family: $font-family;
+            font-size: small;
+            font-weight: bold;
+            color: black;
+        }
+    }
+}
+
+@media (min-width: 350px) and (max-width: 470px) {
+    .image-product {
+        object-fit: cover;
+        max-width: 100%;
+        max-height: 200px;
+    }
+
+    .item-stock {
+        background-color: darkgray;
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        padding: 5px 0;
+        color: white;
+        font-family: $font-family;
+        font-size: small;
+        text-align: center !important;
+    }
+
+    .sold-out-badge {
+        position: absolute;
+        z-index: 10;
+        // top: 0;
+        right: 5px;
+        padding: 5px;
+        background-color: var(--ion-color-danger);
+        color: white;
+        font-size: small;
+        font-family: $font-family;
+    }
+
+    ion-card-title {
+        font-size: small;
+        font-weight: bold;
+        margin-left: 5%;
+        margin-top: 5px;
+        text-align: left !important;
+    }
+
+    .description {
+        text-align: left !important;
+        font-size: small;
+        margin-left: 5%;
+        font-family: $font-family;
+        margin-right: 5%;
+        padding-bottom: 10px;
+        height: 60px;
+    }
+
+    .sale-price-container {
+        text-align: left !important;
+        color: darkgreen;
+        font-family: $font-family;
+        font-size: small;
+
+        .span-price {
+            margin-left: 5%;
+            font-weight: bold;
+        }
+    }
+
+    .col-market-price {
+        text-align: left !important;
+        font-family: $font-family;
+        font-size: smaller;
+        display: inline-block;
+        flex: 0 0 calc(calc(12 / var(--ion-grid-columns, 12)) * 100%);
+        width: calc(calc(12 / var(--ion-grid-columns, 12)) * 100%);
+        max-width: calc(calc(12 / var(--ion-grid-columns, 12)) * 100%);
+
+        s {
+            text-align: left !important;
+            color: var(--ion-color-danger);
+            font-weight: bold;
+        }
+    }
+
+    .save-badge {
+        background-color: var(--ion-color-darkorange);
+        color: white;
+        font-size: $font-size-micro;
+        font-family: $font-family;
+        word-wrap: break-word;
+    }
+
+    .col-save-badge {
+        text-align: left;
+        flex: 0 0 calc(calc(12 / var(--ion-grid-columns, 12)) * 100%);
+        width: calc(calc(12 / var(--ion-grid-columns, 12)) * 100%);
+        max-width: calc(calc(12 / var(--ion-grid-columns, 12)) * 100%);
+    }
+
+    .discount {
+        font-size: smaller;
+        text-align: center;
+        font-family: $font-family;
+        width: 100%;
+        padding-bottom: 2px;
+        color: white;
+        background-color: var(--ion-color-danger);
+    }
+
+    .col-decrease-button,
+    .col-increase-button {
+        flex: 0 0 calc(calc(5 / var(--ion-grid-columns, 12)) * 100%);
+        width: calc(calc(5 / var(--ion-grid-columns, 12)) * 100%);
+        max-width: calc(calc(5 / var(--ion-grid-columns, 12)) * 100%);
+        padding: 0px;
+
+        ion-button {
+            ion-icon {
+                width: 15px;
+                height: 15px;
+            }
+        }
+    }
+
+    .col-quantity-label {
+        flex: 0 0 calc(calc(2 / var(--ion-grid-columns, 12)) * 100%);
+        width: calc(calc(2 / var(--ion-grid-columns, 12)) * 100%);
+        max-width: calc(calc(2 / var(--ion-grid-columns, 12)) * 100%);
+        padding: 0px;
+
+        ion-label {
+            font-family: $font-family;
+            font-size: medium;
+            font-weight: bold;
+            color: black;
+        }
+    }
+}
+
+@media (min-width: 470px) and (max-width: 768px) {
+
+    .image-product {
+        object-fit: cover;
+        width: 100%;
+        height: 200px;
+    }
+
+    .item-stock {
+        background-color: darkgray;
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        padding: 5px 0;
+        color: white;
+        font-family: $font-family;
+        font-size: small;
+        text-align: center !important;
+    }
+
+    .sold-out-badge {
+        position: absolute;
+        z-index: 10;
+        // top: 0;
+        right: 5px;
+        padding: 5px;
+        background-color: var(--ion-color-danger);
+        color: white;
+        font-size: small;
+        font-family: $font-family;
+    }
+
+    ion-card-title {
+        font-size: medium;
+        font-weight: bold;
+        margin-left: 5%;
+        margin-top: 5px;
+        text-align: left !important;
+    }
+
+    .description {
+        text-align: left !important;
+        font-size: small;
+        margin-left: 5%;
+        font-family: $font-family;
+        margin-right: 5%;
+        padding-bottom: 10px;
+        height: 60px;
+    }
+
+    .sale-price-container {
+        text-align: left !important;
+        color: darkgreen;
+        font-family: $font-family;
+        font-size: medium;
+
+        .span-price {
+            margin-left: 5%;
+            font-weight: bold;
+        }
+    }
+
+    .col-market-price {
+        text-align: left !important;
+        font-family: $font-family;
+        font-size: small;
+        display: inline-block;
+        flex: 0 0 calc(calc(7 / var(--ion-grid-columns, 12)) * 100%);
+        width: calc(calc(7 / var(--ion-grid-columns, 12)) * 100%);
+        max-width: calc(calc(7 / var(--ion-grid-columns, 12)) * 100%);
+
+        s {
+            text-align: left !important;
+            color: var(--ion-color-danger);
+            font-weight: bold;
+        }
+    }
+
+    .save-badge {
+        background-color: var(--ion-color-darkorange);
+        color: white;
+        font-size: small;
+        font-family: $font-family;
+        word-wrap: break-word;
+    }
+
+    .col-save-badge {
+        text-align: right;
+        flex: 0 0 calc(calc(5 / var(--ion-grid-columns, 12)) * 100%);
+        width: calc(calc(5 / var(--ion-grid-columns, 12)) * 100%);
+        max-width: calc(calc(5 / var(--ion-grid-columns, 12)) * 100%);
+    }
+
+    .discount {
+        font-size: small;
+        text-align: center;
+        font-family: $font-family;
+        width: 100%;
+        padding-bottom: 2px;
+        color: white;
+        background-color: var(--ion-color-danger);
+    }
+
+    .col-decrease-button,
+    .col-increase-button {
+        flex: 0 0 calc(calc(5 / var(--ion-grid-columns, 12)) * 100%);
+        width: calc(calc(5 / var(--ion-grid-columns, 12)) * 100%);
+        max-width: calc(calc(5 / var(--ion-grid-columns, 12)) * 100%);
+        padding: 0px;
+
+        ion-button {
+            ion-icon {
+                width: 15px;
+                height: 15px;
+            }
+        }
+    }
+
+    .col-quantity-label {
+        flex: 0 0 calc(calc(2 / var(--ion-grid-columns, 12)) * 100%);
+        width: calc(calc(2 / var(--ion-grid-columns, 12)) * 100%);
+        max-width: calc(calc(2 / var(--ion-grid-columns, 12)) * 100%);
+        padding: 0px;
+
+        ion-label {
+            font-family: $font-family;
+            font-size: medium;
+            font-weight: bold;
+            color: black;
+        }
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1000px) {
+
+    .image-product {
+        object-fit: cover;
+        width: 100%;
+        height: 200px;
+    }
+
+    .item-stock {
+        background-color: darkgray;
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        padding: 5px 0;
+        color: white;
+        font-family: $font-family;
+        font-size: small;
+        text-align: center !important;
+    }
+
+    .sold-out-badge {
+        position: absolute;
+        z-index: 10;
+        // top: 0;
+        right: 5px;
+        padding: 5px;
+        background-color: var(--ion-color-danger);
+        color: white;
+        font-size: small;
+        font-family: $font-family;
+    }
+
+    ion-card-title {
+        font-size: medium;
+        font-weight: bold;
+        margin-left: 5%;
+        margin-top: 5px;
+        text-align: left !important;
+    }
+
+    .description {
+        text-align: left !important;
+        font-size: small;
+        margin-left: 5%;
+        font-family: $font-family;
+        margin-right: 5%;
+        padding-bottom: 10px;
+        height: 60px;
+    }
+
+    .sale-price-container {
+        text-align: left !important;
+        color: darkgreen;
+        font-family: $font-family;
+        font-size: medium;
+
+        .span-price {
+            margin-left: 5%;
+            font-weight: bold;
+        }
+    }
+
+    .col-market-price {
+        text-align: left !important;
+        font-family: $font-family;
+        font-size: small;
+        display: inline-block;
+        flex: 0 0 calc(calc(7 / var(--ion-grid-columns, 12)) * 100%);
+        width: calc(calc(7 / var(--ion-grid-columns, 12)) * 100%);
+        max-width: calc(calc(7 / var(--ion-grid-columns, 12)) * 100%);
+
+        s {
+            text-align: left !important;
+            color: var(--ion-color-danger);
+            font-weight: bold;
+        }
+    }
+
+    .save-badge {
+        background-color: var(--ion-color-darkorange);
+        color: white;
+        font-size: small;
+        font-family: $font-family;
+        word-wrap: break-word;
+    }
+
+    .col-save-badge {
+        text-align: right;
+        flex: 0 0 calc(calc(5 / var(--ion-grid-columns, 12)) * 100%);
+        width: calc(calc(5 / var(--ion-grid-columns, 12)) * 100%);
+        max-width: calc(calc(5 / var(--ion-grid-columns, 12)) * 100%);
+    }
+
+    .discount {
+        font-size: small;
+        text-align: center;
+        font-family: $font-family;
+        width: 100%;
+        padding-bottom: 2px;
+        color: white;
+        background-color: var(--ion-color-danger);
+    }
+
+    .col-decrease-button,
+    .col-increase-button {
+        flex: 0 0 calc(calc(5 / var(--ion-grid-columns, 12)) * 100%);
+        width: calc(calc(5 / var(--ion-grid-columns, 12)) * 100%);
+        max-width: calc(calc(5 / var(--ion-grid-columns, 12)) * 100%);
+        padding: 0px;
+
+        ion-button {
+            ion-icon {
+                width: 15px;
+                height: 15px;
+            }
+        }
+    }
+
+    .col-quantity-label {
+        flex: 0 0 calc(calc(2 / var(--ion-grid-columns, 12)) * 100%);
+        width: calc(calc(2 / var(--ion-grid-columns, 12)) * 100%);
+        max-width: calc(calc(2 / var(--ion-grid-columns, 12)) * 100%);
+        padding: 0px;
+
+        ion-label {
+            font-family: $font-family;
+            font-size: medium;
+            font-weight: bold;
+            color: black;
+        }
+    }
+}
+
+@media (min-width: 1000px) {
+
+    .image-product {
+        object-fit: cover;
+        width: 100%;
+        height: 200px;
+    }
+
+    .item-stock {
+        background-color: darkgray;
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        padding: 5px 0;
+        color: white;
+        font-family: $font-family;
+        font-size: small;
+        text-align: center !important;
+    }
+
+    .sold-out-badge {
+        position: absolute;
+        z-index: 10;
+        // top: 0;
+        right: 5px;
+        padding: 5px;
+        background-color: var(--ion-color-danger);
+        color: white;
+        font-size: small;
+        font-family: $font-family;
+    }
+
+    ion-card-title {
+        font-size: medium;
+        font-weight: bold;
+        margin-left: 5%;
+        margin-top: 5px;
+        text-align: left !important;
+    }
+
+    .description {
+        text-align: left !important;
+        font-size: small;
+        margin-left: 5%;
+        font-family: $font-family;
+        margin-right: 5%;
+        padding-bottom: 10px;
+        height: 60px;
+    }
+
+    .sale-price-container {
+        text-align: left !important;
+        color: darkgreen;
+        font-family: $font-family;
+        font-size: medium;
+
+        .span-price {
+            margin-left: 5%;
+            font-weight: bold;
+        }
+    }
+
+    .col-market-price {
+        text-align: left !important;
+        font-family: $font-family;
+        font-size: small;
+        display: inline-block;
+        flex: 0 0 calc(calc(7 / var(--ion-grid-columns, 12)) * 100%);
+        width: calc(calc(7 / var(--ion-grid-columns, 12)) * 100%);
+        max-width: calc(calc(7 / var(--ion-grid-columns, 12)) * 100%);
+
+        s {
+            text-align: left !important;
+            color: var(--ion-color-danger);
+            font-weight: bold;
+        }
+    }
+
+    .save-badge {
+        background-color: var(--ion-color-darkorange);
+        color: white;
+        font-size: small;
+        font-family: $font-family;
+        word-wrap: break-word;
+    }
+
+    .col-save-badge {
+        text-align: right;
+        flex: 0 0 calc(calc(5 / var(--ion-grid-columns, 12)) * 100%);
+        width: calc(calc(5 / var(--ion-grid-columns, 12)) * 100%);
+        max-width: calc(calc(5 / var(--ion-grid-columns, 12)) * 100%);
+    }
+
+    .discount {
+        font-size: small;
+        text-align: center;
+        font-family: $font-family;
+        width: 100%;
+        padding-bottom: 2px;
+        color: white;
+        background-color: var(--ion-color-danger);
+    }
+
+    .col-decrease-button,
+    .col-increase-button {
+        flex: 0 0 calc(calc(5 / var(--ion-grid-columns, 12)) * 100%);
+        width: calc(calc(5 / var(--ion-grid-columns, 12)) * 100%);
+        max-width: calc(calc(5 / var(--ion-grid-columns, 12)) * 100%);
+        padding: 0px;
+
+        ion-button {
+            ion-icon {
+                width: 15px;
+                height: 15px;
+            }
+        }
+    }
+
+    .col-quantity-label {
+        flex: 0 0 calc(calc(2 / var(--ion-grid-columns, 12)) * 100%);
+        width: calc(calc(2 / var(--ion-grid-columns, 12)) * 100%);
+        max-width: calc(calc(2 / var(--ion-grid-columns, 12)) * 100%);
+        padding: 0px;
+
+        ion-label {
+            font-family: $font-family;
+            font-size: medium;
+            font-weight: bold;
+            color: black;
+        }
+    }
+}
+
+ion-button {
+    display: table;
+    margin: 0 auto;
+    color: white;
+    font-size: small;
+    font-family: $font-family;
+    text-transform: none !important;
+    text-align: center;
+    width: 70%;
+    height: 25px;
+    --border-radius: 5px !important;
+}
+
+.card-image {
+    position: relative;
+    height: auto;
+}
+
+.card-content {
+    position: relative;
+}
+
+.img-no-data-available {
+    ion-img {
+        max-height: 100%;
+        max-width: 100%;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: auto;
+    }
+}
+
+.category-name {
+    .lbl-name {
+        font-family: $font-family;
+        font-size: large;
+        font-weight: bold;
+        color: black;
+    }
+
+    .lbl-link {
+        font-family: $font-family;
+        font-size: small;
+        font-weight: bold;
+        color: darkgreen;
+        overflow: visible;
+        text-decoration: underline;
+        text-underline-position: under;
+        pointer-events: all !important;
+        margin: 0px;
+        text-align: right;
+        cursor: pointer;
+    }
+}
+
+.card-slide {
+    border-radius: 0px;
+    padding: 10px;
+    margin-top: 10px;
+}

@@ -1,0 +1,354 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button text="" icon="chevron-back-outline" color="white"></ion-back-button>
+    </ion-buttons>
+    <ion-title color="white">Checkout</ion-title>
+  </ion-toolbar>
+</ion-header>
+<!-- oncontextmenu="return false;" class="unselectable" -->
+<ion-content>
+  <p class="refund-policy">
+    Untuk pengembalian uang pesanan / kebijakan pembatalan pesanan silakan <a href="/refund-policy">klik di sini.</a>
+  </p>
+  <ion-row class="parent-row" style="height: 100%;">
+    <ion-col class="col-left-content">
+      <ion-row class="row-shipping-city">
+        <ion-col size="12">
+          <ion-card class="card-shipping-city">
+            <div class="shipping-city-container">
+              <div class="shipping-heading">
+                <ion-label>Area, Tanggal dan Waktu Pengiriman</ion-label>
+              </div>
+              <div class="area-name">
+                <ion-label>{{city}}</ion-label>
+              </div>
+              <div class="date-time-container">
+                <ion-label>{{deliveryDateTime}}</ion-label>
+              </div>
+            </div>
+            <div class="icon-container">
+              <ion-icon name="location-sharp" color="medium"></ion-icon>
+            </div>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+
+      <ion-row class="row-shipping-address">
+        <ion-col size="12">
+          <ion-card>
+            <div class="shipping-address-heading">
+              <ion-label>Alamat Pengiriman</ion-label>
+            </div>
+            <ion-card-content *ngIf="isShippingAddressSelected" class="address-content">
+              <p><b>{{shippingAddress.first_name}} {{shippingAddress.last_name}}</b></p>
+              <p>{{shippingAddress.phone}}</p>
+              <p>{{shippingAddress.address1}}, {{shippingAddress.address2}}</p>
+              <p>{{shippingAddress.city}} - {{shippingAddress.postal_code}}</p>
+              <p>{{shippingAddress.state_or_province}}</p>
+            </ion-card-content>
+            <div class="button-container">
+              <ion-button (click)="openSelectShippingAddressModal()" color="darkgreen">
+                Pilih Alamat Pengiriman
+              </ion-button>
+            </div>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+
+      <ion-row class="row-cart-products">
+        <ion-col class="col-product" size="12">
+          <ion-list>
+            <ion-list-header>Total Pemesanan ({{getTotalProducts()}} item)</ion-list-header>
+            <ion-item class="item-product" *ngFor="let product of products | keyvalue" lines="none">
+              <ion-card class="card-product">
+                <ion-item>
+                  <ion-img slot="start" [src]="product.value.image_url"></ion-img>
+                  <ion-label>
+                    <div class="top-content">
+                      <div class="product-name">
+                        <p>
+                          {{product.value.name}}
+                        </p>
+                      </div>
+                    </div>
+                    <div *ngIf="product.value.is_discounted" class="unit-discounted-price">
+                      {{product.value.sale_price | currency : "Rp. ":"Rp. ":"1.0" | decimalReplace: ",":"." }}
+                    </div>
+                    <div [ngStyle]="product.value.is_discounted ? {'color': 'maroon', 'text-decoration-line': 'line-through'} :
+                                      {'color': 'black', 'text-decoration-line': 'none'} " class="unit-sale-price">
+                      {{product.value.list_price | currency : "Rp. ":"Rp. ":"1.0" | decimalReplace: ",":"." }}
+                    </div>
+                    <div class="bottom-content">
+                      <div class="quantity">
+                        <div *ngIf="product.value.quantity" class="lbl-quantity">
+                          <ion-label>
+                            Qty {{product.value.quantity}}
+                          </ion-label>
+                        </div>
+                        <div *ngIf="product.value.free_item.free_quantity > 0" class="lbl-quantity-free">
+                          <ion-label>
+                            + Qty {{product.value.free_item.free_quantity}} Free
+                          </ion-label>
+                        </div>
+                      </div>
+                    </div>
+                  </ion-label>
+                </ion-item>
+                <ion-footer>
+                  <div class="total">
+                    {{ product.value.total_sale_price | currency : "Rp. ":"Rp. ":"1.0" | decimalReplace: ",":"." }}
+                  </div>
+                  <div *ngIf="product.value.extended_sale_price != product.value.total_sale_price" class="total">
+                    <s
+                      class="danger-color">{{ product.value.extended_sale_price | currency : "Rp. ":"Rp. ":"1.0" | decimalReplace: ",":"." }}</s>
+                  </div>
+                </ion-footer>
+              </ion-card>
+            </ion-item>
+          </ion-list>
+        </ion-col>
+      </ion-row>
+    </ion-col>
+
+    <ion-col class="col-right-content">
+      <ion-card class="card-right-content">
+        <ion-card-title>Ringkasan</ion-card-title>
+        <div class="coupon-container">
+          <div *ngIf="disableCoupon && coupons.length == 0" class="coupon-alert">
+            <ion-label>Voucher hanya dapat diterapkan jika tidak ada Barang diskon atau gratis, di keranjang Anda!
+            </ion-label>
+          </div>
+          <div *ngIf="!disableCoupon && !isShippingAddressSelected" class="coupon-alert">
+            <ion-label>Silahkan pilih alamat pengiriman untuk menerapkan kupon!</ion-label>
+          </div>
+          <div *ngIf="coupons.length > 0" class="coupon-alert">
+            <ion-label>Tidak ada lagi voucher dapat diterapkan untuk checkout ini!</ion-label>
+          </div>
+          <div class="coupon-code-input">
+            <ion-item>
+              <ion-input placeholder="Kode voucher" name="coupon" [formControl]="couponCodeForm.controls['coupon']"
+                ngDefaultControl></ion-input>
+            </ion-item>
+          </div>
+          <div class="button-container">
+            <ion-button [disabled]="disableCoupon || !isShippingAddressSelected" (click)="applyCouponCode()"
+              color="darkgreen">
+              Gunakan Voucher
+            </ion-button>
+          </div>
+          <ion-item class="item-applied-coupon" lines="none" *ngFor="let coupon of coupons; let i=index">
+            <div class="coupon-code">
+              <ion-label class="lbl">{{coupon.code}}</ion-label>
+              <ion-label class="lbl">
+                ({{coupon.discounted_amount | currency : "Rp. ":"Rp. ":"1.0" | decimalReplace: ",":"."}})</ion-label>
+            </div>
+            <div slot="end" (click)="deleteCoupon(coupon.code, i)" tappable>
+              <ion-icon name="trash" color="medium"></ion-icon>
+            </div>
+          </ion-item>
+        </div>
+        <ion-list class="list-pricing">
+          <ion-item class="item-total-price">
+            <div class="item-container">
+              <div class="lbl-total-price">
+                <ion-label class="lbl">Total Harga</ion-label>
+              </div>
+              <div class="value-total-price">
+                <ion-label class="value">{{ getSubtotal() | currency : "Rp. ":"Rp. ":"1.0" | decimalReplace: ",":"." }}
+                </ion-label>
+              </div>
+            </div>
+          </ion-item>
+          <ion-item class="item-coupon">
+            <div class="item-container">
+              <div class="lbl-coupon">
+                <!-- <ion-label [ngStyle]="disableCoupon? {'color': 'gray'} : {'color': 'black'}" class="lbl"> -->
+                <ion-label class="lbl">
+                  Kupon
+                </ion-label>
+              </div>
+              <div class="value-coupon">
+                <!-- <ion-label [ngStyle]="disableCoupon? {'color': 'gray'} : {'color': 'darkorange'}" class="value"> -->
+                <ion-label class="value">
+                  - {{ getTotalCouponAmount() | currency : "Rp. ":"Rp. ":"1.0" | decimalReplace: ",":"." }}
+                </ion-label>
+              </div>
+            </div>
+          </ion-item>
+          <ion-item class="item-shipping-price">
+            <div class="item-container">
+              <div class="lbl-shipping-price">
+                <ion-label class="lbl">Ongkos Kirim</ion-label>
+              </div>
+              <div *ngIf="isShippingAddressSelected" class="value-shipping-price">
+                <ion-label *ngIf="shippingCost == 0" class="value">Gratis Ongkir</ion-label>
+                <ion-label *ngIf="shippingCost != 0" class="value-strike">
+                  {{shippingCost | currency : "Rp. ":"Rp. ":"1.0" | decimalReplace: ",":"."}}</ion-label>
+              </div>
+              <div *ngIf="!isShippingAddressSelected" class="value-shipping-price">
+                <ion-label class="value">Silahkan Pilih Alamat Pengiriman!</ion-label>
+              </div>
+            </div>
+          </ion-item>
+          <ion-item class="item-grand-total">
+            <div class="item-container">
+              <div class="lbl-grand-total">
+                <ion-label class="lbl">Grand Total</ion-label>
+              </div>
+              <div class="value-grand-total">
+                <ion-label class="value">
+                  {{ getGrandTotal() | currency : "Rp. ":"Rp. ":"1.0" | decimalReplace: ",":"." }}
+                </ion-label>
+              </div>
+            </div>
+          </ion-item>
+        </ion-list>
+
+        <ion-list class="list-payment-methods">
+          <ion-list-header><b>Metode Pembayaran</b></ion-list-header>
+          <ion-card>
+            <ion-item-group>
+              <ion-item-divider color="white">
+                <ion-item button detail="false" (click)="selectPaymentMethod('ONLINE')"
+                  [disabled]="getGrandTotal()<getMinOrderAmountForEPayment()" lines="none">
+                  <ion-label>Pembayaran Online</ion-label>
+                  <ion-icon color="medium"
+                    *ngIf="selectedPaymentMethod !== 'ONLINE' && getGrandTotal()>=getMinOrderAmountForEPayment()"
+                    name="radio-button-off-outline"></ion-icon>
+                  <ion-icon color="medium"
+                    *ngIf="selectedPaymentMethod === 'ONLINE' && getGrandTotal()>=getMinOrderAmountForEPayment()"
+                    name="radio-button-on"></ion-icon>
+                </ion-item>
+              </ion-item-divider>
+              <ion-item *ngIf="getGrandTotal() < getMinOrderAmountForEPayment()" lines="none">
+                <p class="payment-method-alert">
+                  Anda dapat memilih metode pembayaran ini hanya jika nilai pesanan lebih dari
+                  {{getMinOrderAmountForEPayment() | currency : "Rp. ":"Rp. ":"1.0" | decimalReplace: ",":"."}}. Silakan
+                  pilih metode pembayaran COD untuk nilai pesanan kurang dari
+                  {{getMinOrderAmountForEPayment() | currency : "Rp. ":"Rp. ":"1.0" | decimalReplace: ",":"."}}!
+                </p>
+              </ion-item>
+              <ion-item lines="none">
+                <p>Anda dapat menggunakan salah satu metode pembayaran berikut di halaman pembayaran (Virtual Account,
+                  Kartu Kredit, Alfamart)</p>
+              </ion-item>
+              <ion-row class="payment-methods-images">
+                <ion-col>
+                  <ion-img src="../../assets/mandiri-image.svg"></ion-img>
+                </ion-col>
+                <ion-col>
+                  <ion-img src="../../assets/bni-image.svg"></ion-img>
+                </ion-col>
+                <!-- <ion-col>
+                  <ion-img src="../../assets/bca-image.svg"></ion-img>
+                </ion-col> -->
+                <ion-col>
+                  <ion-img src="../../assets/permata-image.svg"></ion-img>
+                </ion-col>
+                <ion-col>
+                  <ion-img src="../../assets/bri-image.svg"></ion-img>
+                </ion-col>
+                <ion-col>
+                  <ion-img src="../../assets/master-card-img.svg"></ion-img>
+                </ion-col>
+                <ion-col>
+                  <ion-img src="../../assets/visa-image.svg"></ion-img>
+                </ion-col>
+                <ion-col>
+                  <ion-img src="../../assets/jcb-image.svg"></ion-img>
+                </ion-col>
+                <ion-col>
+                  <ion-img src="../../assets/alfamart-image.svg"></ion-img>
+                </ion-col>
+                <ion-col>
+                  <ion-img src="../../assets/ovo-image.svg"></ion-img>
+                </ion-col>
+                <ion-col>
+                  <ion-img src="../../assets/dana-image.svg"></ion-img>
+                </ion-col>
+              </ion-row>
+            </ion-item-group>
+          </ion-card>
+
+          <!-- <ion-card>
+            <ion-item-group>
+              <ion-item-divider color="white">
+                <ion-item lines="none">
+                  <ion-label>E-Wallet</ion-label>
+                </ion-item>
+              </ion-item-divider>
+              <ion-item-group>
+                <ion-item button detail="false" (click)="selectPaymentMethod('OVO')" lines="none">
+                  <ion-img src="../../assets/ovo-image.svg"></ion-img>
+                  <ion-label color="ovo">OVO</ion-label>
+                  <ion-icon color="medium" *ngIf="selectedPaymentMethod !== 'OVO'" name="radio-button-off-outline"></ion-icon>
+                  <ion-icon color="medium" *ngIf="selectedPaymentMethod === 'OVO'" name="radio-button-on"></ion-icon>
+                </ion-item>
+                <ion-item *ngIf="selectedPaymentMethod === 'OVO'" lines="none">
+                  <p>Silahkan masukkan nomor OVO Anda. (Contoh: 081234567890)</p>
+                </ion-item>
+                <ion-item *ngIf="selectedPaymentMethod === 'OVO'">
+                  <ion-item lines="none">
+                    <ion-input placeholder=" Masuk Nomor OVO"></ion-input>
+                  </ion-item>
+                </ion-item>
+              </ion-item-group>
+              <ion-item button detail="false" (click)="selectPaymentMethod('DANA')" lines="none">
+                <ion-img src="../../assets/dana-icon-image.svg"></ion-img>
+                <ion-label color="dana">Dana</ion-label>
+                <ion-icon color="medium" *ngIf="selectedPaymentMethod !== 'DANA'" name="radio-button-off-outline"></ion-icon>
+                <ion-icon color="medium" *ngIf="selectedPaymentMethod === 'DANA'" name="radio-button-on"></ion-icon>
+              </ion-item>
+              <ion-item-group>
+                <ion-item button detail="false" (click)="selectPaymentMethod('LINKAJA')" lines="none">
+                  <ion-img src="../../assets/linkaja-image.svg"></ion-img>
+                  <ion-label color="linkaja">Link Aja</ion-label>
+                  <ion-icon color="medium" *ngIf="selectedPaymentMethod !== 'LINKAJA'" name="radio-button-off-outline"></ion-icon>
+                  <ion-icon color="medium" *ngIf="selectedPaymentMethod === 'LINKAJA'" name="radio-button-on"></ion-icon>
+                </ion-item>
+                <ion-item *ngIf="selectedPaymentMethod === 'LINKAJA'" lines="none">
+                  <p>Silahkan masukkan nomor Link Aja Anda. (Contoh: 081234567890)</p>
+                </ion-item>
+                <ion-item *ngIf="selectedPaymentMethod === 'LINKAJA'" lines="none">
+                  <ion-item lines="none">
+                    <ion-input placeholder=" Masuk Nomor Link Aja"></ion-input>
+                  </ion-item>
+                </ion-item>
+              </ion-item-group>
+            </ion-item-group>
+          </ion-card> -->
+
+          <ion-card>
+            <ion-item-group>
+              <ion-item-divider color="white">
+                <ion-item button detail="false" (click)="selectPaymentMethod('COD')" lines="none">
+                  <ion-label>COD (Cash-On-Delivery)</ion-label>
+                  <ion-icon color="medium" *ngIf="selectedPaymentMethod !== 'COD'" name="radio-button-off-outline">
+                  </ion-icon>
+                  <ion-icon color="medium" *ngIf="selectedPaymentMethod === 'COD'" name="radio-button-on"></ion-icon>
+                </ion-item>
+              </ion-item-divider>
+            </ion-item-group>
+          </ion-card>
+        </ion-list>
+        <div class="button-pay">
+          <ion-button [disabled]="(!isShippingAddressSelected) || (selectedPaymentMethod === ''? true:false)"
+            (click)="payAmount()" color="darkgreen">
+            Bayar {{ getGrandTotal() | currency : "Rp. ":"Rp. ":"1.0" | decimalReplace: ",":"." }}
+          </ion-button>
+          <p *ngIf="!isShippingAddressSelected">Silahkan pilih alamat pengiriman untuk membayar!</p>
+          <p *ngIf="selectedPaymentMethod === ''? true:false">Silakan pilih metode pembayaran untuk membayar!</p>
+        </div>
+      </ion-card>
+      <div class="images-secure-payment-container">
+        <div class="images-secure-payment">
+          <ion-img src="../../assets/100-secure-payment.svg"></ion-img>
+        </div>
+        <div class="images-secure-payment">
+          <ion-img src="../../assets/quality-guarantee-1.svg"></ion-img>
+        </div>
+      </div>
+    </ion-col>
+  </ion-row>
+</ion-content>

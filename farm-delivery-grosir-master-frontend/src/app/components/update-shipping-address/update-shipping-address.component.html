@@ -1,0 +1,73 @@
+<ion-header>
+  <ion-item>
+    <ion-label color="white">
+      Perbarui Alamat Pengiriman
+    </ion-label>
+    <ion-button (click)="closeModal()" color="danger">
+      <ion-icon name="close-circle-sharp" color="white"></ion-icon>
+    </ion-button>
+  </ion-item>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="updateShippingAddressForm">
+    <!-- <ion-item lines="none" class="ion-no-padding name-item" color="transparent"> -->
+    <ion-item class="first-name"
+      [class.invalid]="!updateShippingAddressForm.controls.firstName.valid && (updateShippingAddressForm.controls.firstName.dirty || submitAttempt)">
+      <ion-input type="text" placeholder="Nama depan *" name="firstName"
+        [formControl]="updateShippingAddressForm.controls['firstName']" ngDefaultControl></ion-input>
+    </ion-item>
+    <ion-item class="last-name"
+      [class.invalid]="!updateShippingAddressForm.controls.lastName.valid && (updateShippingAddressForm.controls.lastName.dirty || submitAttempt)">
+      <ion-input type="text" placeholder="Nama belakang *" name="lastName"
+        [formControl]="updateShippingAddressForm.controls['lastName']" ngDefaultControl></ion-input>
+    </ion-item>
+    <!-- </ion-item> -->
+    <ion-item class="address-item"
+      [class.invalid]="!updateShippingAddressForm.controls.address.valid && (updateShippingAddressForm.controls.address.dirty || submitAttempt)">
+      <ion-textarea placeholder="Alamat *" name="address" [formControl]="updateShippingAddressForm.controls['address']"
+        ngDefaultControl></ion-textarea>
+    </ion-item>
+    <ion-item class="town-item"
+      [class.invalid]="!updateShippingAddressForm.controls.town.valid && (updateShippingAddressForm.controls.town.dirty || submitAttempt)">
+      <ion-input type="text" name="town" placeholder="Nama Desa/Kelurahan *"
+        [formControl]="updateShippingAddressForm.controls['town']" ngDefaultControl></ion-input>
+    </ion-item>
+    <ion-item class="town-item"
+      [class.invalid]="!updateShippingAddressForm.controls.subdistrict.valid && (updateShippingAddressForm.controls.subdistrict.dirty || submitAttempt)">
+      <ion-input type="text" name="subdistrict" placeholder="Nama Kecamatan *"
+        [formControl]="updateShippingAddressForm.controls['subdistrict']" ngDefaultControl></ion-input>
+    </ion-item>
+    <ion-item class="area-item" [class.invalid]="updateShippingAddressForm.getRawValue().area !== areaName">
+      <ion-label>Nama Kota *</ion-label>
+      <ion-input type="text" name="area" [formControl]="updateShippingAddressForm.controls['area']" ngDefaultControl>
+      </ion-input>
+    </ion-item>
+    <ion-item class="province-item" [class.invalid]="updateShippingAddressForm.getRawValue().province !== provinceName">
+      <ion-label>Nama Provinsi *</ion-label>
+      <ion-input type="text" name="province" [formControl]="updateShippingAddressForm.controls['province']"
+        ngDefaultControl></ion-input>
+    </ion-item>
+    <ion-item class="phone-item"
+      [class.invalid]="!updateShippingAddressForm.controls.phoneNum.valid && (updateShippingAddressForm.controls.phoneNum.dirty || submitAttempt)">
+      <ion-label>+62</ion-label>
+      <ion-input type="tel" placeholder="Nomor hp atau Whatsapp *" name="phoneNum"
+        [formControl]="updateShippingAddressForm.controls['phoneNum']" ngDefaultControl></ion-input>
+    </ion-item>
+    <ion-item lines="none" class="postal-code-item"
+      [class.invalid]="!updateShippingAddressForm.controls.postalCode.valid && (updateShippingAddressForm.controls.postalCode.dirty || submitAttempt)">
+      <ion-label>Kode POS *</ion-label>
+      <ion-select placeholder="Pilih Kode POS" name="postalCode" (ionChange)="onChange($event)"
+        [formControl]="updateShippingAddressForm.controls['postalCode']" ngDefaultControl>
+        <ion-select-option *ngFor="let pincode of postalCodes" [value]="pincode">{{pincode}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+  </form>
+</ion-content>
+
+<ion-footer>
+  <ion-label>* - Wajib diisi</ion-label>
+  <div class="btn-submit">
+    <ion-button (click)="onClickUpdateShippingAddress()" color="darkgreen">Perbarui Alamat</ion-button>
+  </div>
+</ion-footer>

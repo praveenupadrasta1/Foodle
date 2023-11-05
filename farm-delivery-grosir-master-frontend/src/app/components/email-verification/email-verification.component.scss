@@ -1,0 +1,167 @@
+$font-family: "Roboto";
+
+ion-label {
+    white-space: pre-line !important;
+    font-family: $font-family;
+}
+
+
+ion-item {
+    display: flex;
+    flex-wrap: wrap;
+    font-family: $font-family;
+}
+
+ion-title {
+    margin-top: 10px;
+    font-weight: bold;
+    font-family: $font-family;
+}
+
+ion-item {
+    .error-msg {
+        font-size: 0.8em;
+        color: #b1b1b1;
+    }
+}
+
+.center-align{
+    text-align: center;
+    font-family: $font-family;
+}
+
+.checked {
+    color:  green;
+}
+
+.not-checked{
+    color: red;
+}
+
+
+ion-card-content {
+    padding: 5px;
+    font-family: $font-family;
+
+    .value-label {
+        font-weight: bold;
+    }
+}
+
+ion-row {
+    width: 99%;
+}
+
+@media(max-width:350px) {
+    ion-card-content {
+        .label {
+            font-size: 10pt;
+            text-transform: none;
+        }
+
+        .edit-button {
+            text-align: center;
+            margin-left: 2%;
+        }
+    }
+}
+
+@media(min-width:350px) and (max-width: 470px) {
+    ion-card-content {
+        .label {
+            font-size: 10pt;
+            text-transform: none;
+            font-family: $font-family;
+        }
+
+        .edit-button {
+            text-align: center;
+            margin-left: 3%;
+            font-family: $font-family;
+        }
+    }
+}
+
+@media(min-width:470px) and (max-width: 768px) {
+    ion-card-content {
+        .label {
+            font-size: 11pt;
+            text-transform: none;
+        }
+
+        .edit-button {
+            margin-left: 4%;
+        }
+    }
+}
+
+@media(min-width:768px) and (max-width: 1000px) {
+    ion-card-content {
+        .label {
+            font-size: 12pt;
+            text-transform: none;
+        }
+
+        .edit-button {
+            margin-left: 4%;
+            font-family: $font-family;
+        }
+    }
+}
+
+@media(min-width:768px) and (max-width: 1000px) {
+    ion-card-content {
+        .label {
+            font-size: 12pt;
+            text-transform: none;
+            font-family: $font-family;
+        }
+
+        .edit-button {
+            margin-left: 4%;
+            font-family: $font-family;
+        }
+
+        .timer{
+            margin-left:30px;
+        }
+    }
+}
+
+@media(min-width:1000px) and (max-width:1365px) {
+    ion-card-content {
+        .label {
+            font-size: initial;
+            text-transform: none;
+            font-family: $font-family;
+        }
+
+        .edit-button {
+            margin-left: 5%;
+            font-family: $font-family;
+        }
+        
+        .timer{
+            margin-left:30px;
+        }
+    }
+}
+
+@media(min-width:1366px) {
+    ion-card-content {
+        .label {
+            font-size: initial;
+            text-transform: none;
+            font-family: $font-family;
+        }
+
+        .edit-button {
+            margin-left: 5%;
+            font-family: $font-family;
+        }
+
+        .timer{
+            margin-left:30px;
+        }
+    }
+}

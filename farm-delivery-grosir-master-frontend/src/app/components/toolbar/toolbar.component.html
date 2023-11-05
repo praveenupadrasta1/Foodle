@@ -1,0 +1,30 @@
+<ion-toolbar color="primary">
+  <ion-buttons slot="start">
+    <ion-menu-button color="white"></ion-menu-button>
+  </ion-buttons>
+  <ion-buttons slot="end">
+    <!-- <ion-icon name="language-sharp" class="toolbar-icon"></ion-icon> -->
+    <ion-button (click)="goToSearch()" class="search">
+      <ion-icon name="search-sharp" color="white" class="toolbar-icon"></ion-icon>
+    </ion-button>
+    <app-barcode-scanner *ngIf="isCordova"></app-barcode-scanner>
+    <ion-button (click)="openAccountPopover($event)" tappable>
+      <ion-icon name="person-circle-sharp" class="toolbar-icon"></ion-icon>
+    </ion-button>
+  </ion-buttons>
+  <ion-img class="logo" src="../../../assets/foodle-logo.png"></ion-img>
+  <!-- <ion-title class="title" color="white">Foodle</ion-title> -->
+</ion-toolbar>
+<ion-toolbar color="white">
+  <div (click)="openModal()" class="ion-activatable ripple-parent" tappable>
+    <ion-ripple-effect></ion-ripple-effect>
+    <div class="sub-toolbar">
+      <p class="sub-toolbar heading">Ganti Area, Tanggal & Waktu pengiriman</p>
+      <ion-icon name="caret-down-circle-sharp" class="sub-toolbar edit-icon"></ion-icon>
+    </div>
+    <div class="sub-toolbar" style="margin-top: -20px;">
+      <p class="sub-toolbar city">{{selectedDeliveryCity}}</p>
+      <p class="sub-toolbar date-time">{{selectedDeliveryDateTime}}</p>
+    </div>
+  </div>
+</ion-toolbar>

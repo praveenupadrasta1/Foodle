@@ -1,0 +1,51 @@
+$font-family: 'Roboto';
+
+.img-no-data-available {
+    display: block;
+    text-align: center;
+
+    @media (max-width: 400px) {
+        img {
+            width: 400px;
+            height: 400px;
+        }
+    }
+
+    @media (min-width: 400px) {
+        img {
+            width: 500px;
+            height: 500px;
+        }
+    }
+}
+
+.btn-container {
+    text-align: center;
+    margin: 2%;
+
+    @media (max-width: 400px) {
+        ion-button {
+            text-transform: none !important;
+            color: white;
+            font-size: small;
+            font-family: $font-family;
+
+            ion-icon {
+                padding-right: 5px;
+            }
+        }
+    }
+
+    @media (min-width: 400px) {
+        ion-button {
+            text-transform: none !important;
+            color: white;
+            font-size: medium;
+            font-family: $font-family;
+
+            ion-icon {
+                padding-right: 5px;
+            }
+        }
+    }
+}

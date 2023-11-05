@@ -1,0 +1,18 @@
+ion-icon {
+    @media (max-width: 350px) {
+        width: 20px;
+        height: 20px;
+    }
+
+    @media (min-width: 350px) and (max-width:470px) {
+        width: 25px;
+        height: 25px;
+    }
+
+    @media (min-width: 470px) {
+        width: 35px;
+        height: 35px;
+    }
+
+    color: white;
+}

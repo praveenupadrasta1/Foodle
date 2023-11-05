@@ -1,0 +1,412 @@
+@import '../../../theme/variables.scss';
+$font-family: "Roboto";
+
+.ripple-parent {
+    position: relative;
+    overflow: hidden;
+}
+
+.card-order {
+    margin: 10px;
+}
+
+.status-color {
+    background-color: maroon;
+}
+
+.img-no-data-available {
+    ion-img {
+        max-height: 100%;
+        max-width: 100%;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: auto;
+    }
+}
+
+.order-date {
+    text-align: center;
+
+    .year {
+        font-family: $font-family;
+    }
+
+    .date {
+        font-family: $font-family;
+        font-weight: bold;
+        color: darkgreen;
+    }
+
+    .month {
+        font-family: $font-family;
+    }
+}
+
+.order-info {
+    text-align: center;
+
+    .lbl-id {
+        font-family: $font-family;
+    }
+
+    .id {
+        font-family: $font-family;
+        color: darkgreen;
+    }
+
+    .area {
+        font-family: $font-family;
+        color: gray;
+        font-weight: bold;
+    }
+}
+
+.order-status {
+    position: relative;
+    text-align: center;
+
+    .status {
+        position: absolute;
+        font-family: $font-family;
+        top: 30%;
+        left: 0;
+        right: 0;
+    }
+}
+
+.delivery-info {
+    text-align: center;
+
+    .lbl {
+        font-family: $font-family;
+    }
+
+    .delivery-date {
+        font-family: $font-family;
+        font-weight: bold;
+    }
+}
+
+.total-info {
+    text-align: right;
+    padding-right: 5px;
+    width: 100%;
+    font-family: $font-family;
+}
+
+.total {
+    font-family: $font-family;
+}
+
+.danger-color {
+    color: var(--ion-color-danger);
+}
+
+@media (max-width: 470px) {
+    .order-date {
+        .year {
+            font-size: small;
+        }
+
+        .date {
+            font-size: medium;
+        }
+
+        .month {
+            font-size: small;
+        }
+    }
+
+    .order-info {
+
+        .lbl-id,
+        .id {
+            font-size: small;
+        }
+
+        .area {
+            font-size: medium;
+        }
+    }
+
+    .order-status {
+        .status {
+            font-size: small;
+        }
+    }
+
+    .delivery-info {
+        .lbl {
+            font-size: small;
+        }
+
+        .delivery-date {
+            font-size: small;
+        }
+    }
+
+    .total-info {
+        font-size: small;
+    }
+
+    .total-item-info {
+        font-size: small;
+    }
+
+    .total {
+        font-size: small;
+    }
+
+    .col-pre-empty {
+        flex: 0 0 calc(calc(0 / var(--ion-grid-columns, 12)) * 100%);
+        width: calc(calc(0 / var(--ion-grid-columns, 12)) * 100%);
+        max-width: calc(calc(0 / var(--ion-grid-columns, 12)) * 100%);
+    }
+
+    .delivery-info {
+        flex: 0 0 calc(calc(12 / var(--ion-grid-columns, 12)) * 100%);
+        width: calc(calc(12 / var(--ion-grid-columns, 12)) * 100%);
+        max-width: calc(calc(12 / var(--ion-grid-columns, 12)) * 100%);
+    }
+
+    .col-post-empty {
+        flex: 0 0 calc(calc(0 / var(--ion-grid-columns, 12)) * 100%);
+        width: calc(calc(0 / var(--ion-grid-columns, 12)) * 100%);
+        max-width: calc(calc(0 / var(--ion-grid-columns, 12)) * 100%);
+    }
+}
+
+@media (min-width: 470px) and (max-width: 768px) {
+    .order-date {
+        .year {
+            font-size: medium;
+        }
+
+        .date {
+            font-size: medium;
+        }
+
+        .month {
+            font-size: medium;
+        }
+    }
+
+    .order-info {
+
+        .lbl-id,
+        .id {
+            font-size: medium;
+        }
+
+        .area {
+            font-size: medium;
+        }
+    }
+
+    .order-status {
+        .status {
+            font-size: medium;
+        }
+    }
+
+    .delivery-info {
+        .lbl {
+            font-size: medium;
+        }
+
+        .delivery-date {
+            font-size: medium;
+        }
+    }
+
+    .total-info {
+        font-size: medium;
+    }
+
+    .total-item-info {
+        font-size: medium;
+    }
+
+    .total {
+        font-size: medium;
+    }
+
+    .col-pre-empty {
+        flex: 0 0 calc(calc(0 / var(--ion-grid-columns, 12)) * 100%);
+        width: calc(calc(0 / var(--ion-grid-columns, 12)) * 100%);
+        max-width: calc(calc(0 / var(--ion-grid-columns, 12)) * 100%);
+    }
+
+    .delivery-info {
+        flex: 0 0 calc(calc(12 / var(--ion-grid-columns, 12)) * 100%);
+        width: calc(calc(12 / var(--ion-grid-columns, 12)) * 100%);
+        max-width: calc(calc(12 / var(--ion-grid-columns, 12)) * 100%);
+    }
+
+    .col-post-empty {
+        flex: 0 0 calc(calc(0 / var(--ion-grid-columns, 12)) * 100%);
+        width: calc(calc(0 / var(--ion-grid-columns, 12)) * 100%);
+        max-width: calc(calc(0 / var(--ion-grid-columns, 12)) * 100%);
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1000px) {
+    .list-orders {
+        margin-left: 15%;
+        margin-right: 15%;
+    }
+
+    .order-date {
+        .year {
+            font-size: medium;
+        }
+
+        .date {
+            font-size: large;
+        }
+
+        .month {
+            font-size: medium;
+        }
+    }
+
+    .order-info {
+
+        .lbl-id,
+        .id {
+            font-size: medium;
+        }
+
+        .area {
+            font-size: medium;
+        }
+    }
+
+    .order-status {
+        .status {
+            font-size: medium;
+        }
+    }
+
+    .delivery-info {
+        .lbl {
+            font-size: medium;
+        }
+
+        .delivery-date {
+            font-size: medium;
+        }
+    }
+
+    .total-info {
+        font-size: medium;
+    }
+
+    .total-item-info {
+        font-size: medium;
+    }
+
+    .total {
+        font-size: medium;
+    }
+
+    .col-pre-empty {
+        flex: 0 0 calc(calc(2 / var(--ion-grid-columns, 12)) * 100%);
+        width: calc(calc(2 / var(--ion-grid-columns, 12)) * 100%);
+        max-width: calc(calc(2 / var(--ion-grid-columns, 12)) * 100%);
+    }
+
+    .delivery-info {
+        flex: 0 0 calc(calc(6 / var(--ion-grid-columns, 12)) * 100%);
+        width: calc(calc(6 / var(--ion-grid-columns, 12)) * 100%);
+        max-width: calc(calc(6 / var(--ion-grid-columns, 12)) * 100%);
+    }
+
+    .col-post-empty {
+        flex: 0 0 calc(calc(4 / var(--ion-grid-columns, 12)) * 100%);
+        width: calc(calc(4 / var(--ion-grid-columns, 12)) * 100%);
+        max-width: calc(calc(4 / var(--ion-grid-columns, 12)) * 100%);
+    }
+}
+
+@media (min-width: 1000px) {
+    .list-orders {
+        margin-left: 20%;
+        margin-right: 20%;
+    }
+
+    .order-date {
+        .year {
+            font-size: medium;
+        }
+
+        .date {
+            font-size: large;
+        }
+
+        .month {
+            font-size: medium;
+        }
+    }
+
+    .order-info {
+
+        .lbl-id,
+        .id {
+            font-size: medium;
+        }
+
+        .area {
+            font-size: medium;
+        }
+    }
+
+    .order-status {
+        .status {
+            font-size: medium;
+        }
+    }
+
+    .delivery-info {
+        .lbl {
+            font-size: medium;
+        }
+
+        .delivery-date {
+            font-size: medium;
+        }
+    }
+
+    .total-info {
+        font-size: medium;
+    }
+
+    .total-item-info {
+        font-size: medium;
+    }
+
+    .total {
+        font-size: medium;
+    }
+
+    .col-pre-empty {
+        flex: 0 0 calc(calc(2 / var(--ion-grid-columns, 12)) * 100%);
+        width: calc(calc(2 / var(--ion-grid-columns, 12)) * 100%);
+        max-width: calc(calc(2 / var(--ion-grid-columns, 12)) * 100%);
+    }
+
+    .delivery-info {
+        flex: 0 0 calc(calc(6 / var(--ion-grid-columns, 12)) * 100%);
+        width: calc(calc(6 / var(--ion-grid-columns, 12)) * 100%);
+        max-width: calc(calc(6 / var(--ion-grid-columns, 12)) * 100%);
+    }
+
+    .col-post-empty {
+        flex: 0 0 calc(calc(4 / var(--ion-grid-columns, 12)) * 100%);
+        width: calc(calc(4 / var(--ion-grid-columns, 12)) * 100%);
+        max-width: calc(calc(4 / var(--ion-grid-columns, 12)) * 100%);
+    }
+}

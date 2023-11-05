@@ -1,0 +1,178 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="home" text="" icon="chevron-back-outline" color="white"></ion-back-button>
+    </ion-buttons>
+    <ion-title color="white">Rincian Pesanan</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="refreshPage($event)" *ngIf="!isBrowser">
+    <ion-refresher-content pullingIcon="arrow-down-outline" pullingText="Pull to refresh" refreshingSpinner="dots"
+      refreshingText="Refreshing...">
+    </ion-refresher-content>
+  </ion-refresher>
+  <div class="parent-container">
+    <ion-card class="card-order">
+      <ion-row [ngStyle]="{'background-color': order.status_color}">
+        <ion-col>
+          <div></div>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="2" class="order-date">
+          <div class="year">{{order.year_created}}</div>
+          <div class="date">{{order.date_created}}</div>
+          <div class="month">{{order.month_created}}</div>
+        </ion-col>
+        <ion-col size="6" class="order-info">
+          <div class="lbl-id">Order ID: <b class="id">#{{order.id}}</b></div>
+          <div class="total-items-info">Jumlah Barang: <b class="total">{{order.items_total}}</b></div>
+          <div class="area">{{order.billing_address.city}}</div>
+        </ion-col>
+        <ion-col class="order-status">
+          <div class="status">{{order.status}}</div>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col class="col-pre-empty"></ion-col>
+        <ion-col class="delivery-info">
+          <div class="lbl">Waktu pengiriman</div>
+          <div class="delivery-date">{{order.customer_message}}</div>
+        </ion-col>
+        <ion-col class="col-post-empty"></ion-col>
+      </ion-row>
+      <ion-footer>
+        <div class="total-info">
+          Jumlah: <b
+            class="total">{{order.total_inc_tax | currency : "Rp. ":"Rp. ":"1.0" | decimalReplace: ",":"." }}</b>
+        </div>
+        <div
+          *ngIf="(order.status_id == 4 || order.status_id == 14) && order.staff_notes.payment_method != 'Manual Payment'"
+          class="total-info danger-color">
+          Refunded: <b
+            class="total">{{order.refunded_amount | currency : "Rp. ":"Rp. ":"1.0" | decimalReplace: ",":"." }}</b>
+        </div>
+      </ion-footer>
+    </ion-card>
+
+    <ion-row class="order-details-row">
+      <ion-col class="col-payment-details">
+        <ion-card class="card-payment-details">
+          <ion-card-subtitle>Rincian Pembayaran</ion-card-subtitle>
+          <div class="payment-method">Metode Pembayaran: <b class="value">{{order.staff_notes.payment_channel}}</b>
+          </div>
+          <div *ngIf="order.staff_notes.payment_method != 'Manual Payment'" class="payment-id">
+            ID Pembayaran: <b class="value">{{order.staff_notes.optional_params.external_id}}</b>
+          </div>
+        </ion-card>
+      </ion-col>
+      <ion-col class="col-delivery-address">
+        <ion-card class="card-shipping-details">
+          <ion-card-subtitle>Alamat Pengiriman</ion-card-subtitle>
+          <div><b>{{order.billing_address.first_name}} {{order.billing_address.last_name}}</b></div>
+          <div>{{order.billing_address.phone}}</div>
+          <div>{{order.billing_address.email}}</div>
+          <div>{{order.billing_address.street_1}}, {{order.billing_address.street_2}}</div>
+          <div>{{order.billing_address.city}} - {{order.billing_address.zip}}</div>
+          <div>{{order.billing_address.state}}</div>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+
+    <ion-list class="list-products" *ngIf="getNumProducts() > 0">
+      <ion-item class="item-product" *ngFor="let product of products | keyvalue" lines="none">
+        <ion-card class="card-product">
+          <ion-item>
+            <ion-label>
+              <div class="top-content">
+                <div class="product-name">
+                  <p>
+                    {{product.value.name}}
+                  </p>
+                </div>
+              </div>
+              <div class="unit-sale-price">
+                {{product.value.price_inc_tax | currency : "Rp. ":"Rp. ":"1.0" | decimalReplace: ",":"."}}
+              </div>
+              <div class="bottom-content">
+                <div class="quantity">
+                  <div *ngIf="product.value.quantity" class="lbl-quantity">
+                    <ion-label>
+                      Qty {{product.value.quantity}}
+                    </ion-label>
+                  </div>
+                  <div *ngIf="product.value.free_item.free_quantity > 0" class="lbl-quantity-free">
+                    <ion-label>
+                      + Qty {{product.value.free_item.free_quantity}} Free
+                    </ion-label>
+                  </div>
+                </div>
+              </div>
+            </ion-label>
+          </ion-item>
+          <ion-footer>
+            <div class="total">
+              {{ product.value.total_sale_price | currency : "Rp. ":"Rp. ":"1.0" | decimalReplace: ",":"." }}
+            </div>
+            <div *ngIf="product.value.extended_sale_price != product.value.total_sale_price" class="total">
+              <s
+                class="danger-color">{{ product.value.extended_sale_price | currency : "Rp. ":"Rp. ":"1.0" | decimalReplace: ",":"." }}</s>
+            </div>
+          </ion-footer>
+        </ion-card>
+      </ion-item>
+    </ion-list>
+    <ion-list class="list-products" *ngIf="getNumProducts() == 0 && isLoading">
+      <ion-item class="item-product" *ngFor="let product of [1,2,3,4,5]">
+        <ion-card class="card-product">
+          <ion-row>
+            <ion-skeleton-text animated style="width: 100%; height: 60px"></ion-skeleton-text>
+          </ion-row>
+          <ion-footer style="width: 100%; height: 30px">
+            <ion-skeleton-text animated style="width: 100%; height: 10px"></ion-skeleton-text>
+          </ion-footer>
+        </ion-card>
+      </ion-item>
+    </ion-list>
+
+    <ion-card class="card-summary">
+      <ion-card-title>Ringkasan</ion-card-title>
+      <ion-list class="list-pricing">
+        <ion-item class="item-total-price">
+          <ion-label class="lbl">Total Harga</ion-label>
+          <ion-label class="value">{{ getSubtotal() | currency : "Rp. ":"Rp. ":"1.0" | decimalReplace: ",":"." }}
+          </ion-label>
+        </ion-item>
+        <ion-item class="item-coupon" lines="none">
+          <ion-label class="lbl">
+            Kupon
+          </ion-label>
+          <ion-label class="value">
+            - {{ order.coupon_discount | currency : "Rp. ":"Rp. ":"1.0" | decimalReplace: ",":"." }}
+          </ion-label>
+        </ion-item>
+        <ion-item *ngIf="appliedCoupons.length" class="applied-discounts">
+          <div>
+            <ion-chip *ngFor="let coupon of appliedCoupons">
+              <ion-label>{{coupon}}</ion-label>
+            </ion-chip>
+          </div>
+        </ion-item>
+        <ion-item class="item-shipping-price">
+          <ion-label class="lbl">Ongkos Kirim</ion-label>
+          <ion-label *ngIf="order.shipping_cost_inc_tax == 0" class="value">Gratis Ongkir</ion-label>
+          <ion-label *ngIf="order.shipping_cost_inc_tax != 0" class="value-strike">
+            {{order.shipping_cost_inc_tax | currency : "Rp. ":"Rp. ":"1.0" | decimalReplace: ",":"."}}</ion-label>
+        </ion-item>
+        <ion-item class="item-grand-total">
+          <ion-label class="lbl">Grand Total</ion-label>
+          <ion-label class="value">
+            {{ order.total_inc_tax | currency : "Rp. ":"Rp. ":"1.0" | decimalReplace: ",":"." }}
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-card>
+  </div>
+</ion-content>

@@ -1,0 +1,97 @@
+<ion-content when="md" class="login-left split left">
+</ion-content>
+<ion-content class="login-right split right">
+  <div class="centered">
+    <ion-thumbnail class="home-logo" (click)='goHome()'>
+      <img src="../../../assets/icon/favicon.png" />
+    </ion-thumbnail>
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>
+          <h1>
+            Masuk ke akun Anda
+          </h1>
+        </ion-card-title>
+        <ion-card-subtitle>Belum punya akun? <a href="/register">Daftar disini</a></ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-slides pager="false" [options]="slideOpts">
+          <ion-slide>
+            <form [formGroup]="loginForm" autocomplete="off">
+              <ion-item lines="none"
+                *ngIf="((!loginForm.controls.emailAddress.valid && (loginForm.controls.emailAddress.dirty)) 
+                                                || (!loginForm.controls.password.valid && (loginForm.controls.password.dirty))) && submitAttempt || displayFormError">
+                <p class="error">{{ errorMessage }}</p>
+              </ion-item>
+              <ion-item class="login-form"
+                [class.invalid]="!loginForm.controls.emailAddress.valid && (loginForm.controls.emailAddress.dirty) && submitAttempt">
+                <ion-label position="floating" class="form-input-label">Email Address</ion-label>
+                <ion-input type="text" formControlName="emailAddress" clear-input="true"></ion-input>
+                <ion-icon name="mail" class="form-item-icon ion-align-self-center" slot="start"></ion-icon>
+              </ion-item>
+              <!-- <ion-item lines="none" *ngIf="!loginForm.controls.emailAddress.valid && (loginForm.controls.emailAddress.dirty) && submitAttempt">
+                    <p class="error-msg">Please enter a valid Email Address.</p>
+                  </ion-item> -->
+              <ion-item class="login-form last-item"
+                [class.invalid]="!loginForm.controls.password.valid && (loginForm.controls.password.dirty) && submitAttempt">
+                <ion-label position="floating" class="form-input-label">Password</ion-label>
+                <ion-input formControlName="password" [type]="passwordType" clearOnEdit="false"></ion-input>
+                <ion-icon [name]="passwordLockIcon" class="form-item-icon ion-align-self-center" slot="start">
+                </ion-icon>
+                <ion-icon item-end [name]="passwordIcon" class="passwordIcon ion-align-self-end"
+                  (click)='hideShowPassword()' slot="end"></ion-icon>
+              </ion-item>
+              <div class="forgot-password-link">
+                <a (click)="forgotPassword()"><u>Lupa Password?</u></a>
+              </div>
+              <div class="submit-button" *ngIf="!isLoggedIn">
+                <ion-button size="default" type="submit" (click)="loginUser()">
+                  <ion-label>Masuk</ion-label>
+                </ion-button>
+              </div>
+              <div class="text" *ngIf="!isLoggedIn">
+                <ion-text>atau</ion-text>
+              </div>
+              <div class="google-button" color="red" *ngIf="!isLoggedIn">
+                <ion-button size="default" (click)="googleLogin()">
+                  <ion-icon name="logo-google" color="white"></ion-icon>
+                  <ion-label>Lanjutkan Dengan Google</ion-label>
+                </ion-button>
+              </div>
+              <ion-item class="terms-agreement" lines="none">
+                <ion-note>Dengan melanjutkan, Anda menyatakan bahwa Anda menerima <a
+                    href="/terms-of-service">Persyaratan Layanan</a> and <a href="/privacy-policy">Kebijakan Privasi</a>
+                  kami.</ion-note>
+              </ion-item>
+            </form>
+          </ion-slide>
+          <ion-slide>
+            <ion-item-group class="forgot-password-header-item">
+              <ion-item lines="none">
+                <ion-icon name="arrow-back-outline" slot="start" (click)="signInSlide()"></ion-icon>
+                <ion-label size="large">Lupa Password</ion-label>
+              </ion-item>
+              <ion-item *ngIf="!passwordResetEmailSent">
+                <ion-label position="floating">Alamat Email</ion-label>
+                <ion-input type="text" [value]="passwordResetEmail" clear-input="true"></ion-input>
+              </ion-item>
+              <!-- <ion-item lines="none"> -->
+              <ion-label class="ion-text-wrap" color="dark" size="medium" *ngIf="passwordResetAttempted">
+                {{ passwordResetResult }}
+              </ion-label>
+              <!-- </ion-item> -->
+              <ion-item lines="none">
+                <ion-label size="large"></ion-label>
+              </ion-item>
+              <div class="submit-button" *ngIf="!isLoggedIn && !passwordResetEmailSent">
+                <ion-button size="default" type="submit" (click)="sendPasswordResetEmail()">
+                  <ion-label>Kirim</ion-label>
+                </ion-button>
+              </div>
+            </ion-item-group>
+          </ion-slide>
+        </ion-slides>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>

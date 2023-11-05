@@ -1,0 +1,124 @@
+@import '../../../theme/variables.scss';
+
+$font-family: 'Roboto';
+
+@media (min-width: 769px) {
+    .tabs-hide-md {
+        display: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .split-pane-hide-md {
+        display: none;
+    }
+}
+
+.list-md {
+    position: absolute;
+    top: 30%;
+    width: 100%;
+    // transform: translateY(-50%);
+}
+
+.menu-inner {
+    background: grey;
+}
+
+.item {
+    margin-bottom: 20px;
+    width: 100%;
+
+    // text-align: center;
+    ion-icon {
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+
+    ion-label {
+        font-family: $font-family;
+    }
+}
+
+ion-menu {
+    --ion-background-color: var(--ion-color-primary);
+    // --ion-text-color: var(--ion-color-primary-contrast);
+
+    ion-list {
+        /* optional, but it needs when you use gradient as a background color.*/
+        background: transparent;
+    }
+}
+
+// .menu-list{
+
+// }
+
+// .tab-button{
+//     @media (min-width: 769px) {
+//         border-top: 0.5px solid lightgray;
+//         border-left: 0.5px solid lightgray;
+//         border-right: 0.5px solid lightgray;
+//         border-bottom: 0px;
+//         }
+//         @media (max-width: 769px) {
+//             border-bottom: 0.5px solid lightgray;
+//             border-top: 0px;
+//             border-left: 0.5px solid lightgray;
+//             border-right: 0.5px solid lightgray;
+//             }
+// }
+
+.active-item {
+    @media (min-width: 769px) {
+        border-top: 2px solid var(--ion-color-primary);
+        // border-left: 0.5px solid lightgray;
+        // border-right: 0.5px solid lightgray;
+        border-bottom: 0px;
+    }
+
+    @media (max-width: 769px) {
+        border-bottom: 2px solid var(--ion-color-primary);
+        border-top: 0px;
+        // border-left: 0.5px solid lightgray;
+        // border-right: 0.5px solid lightgray;
+    }
+}
+
+.tab-buttons {
+    text-align: center;
+    margin-top: 10px;
+}
+
+ion-footer {
+    height: 40px;
+
+    .tabs-btns {
+        display: flex;
+
+        ion-icon {
+            width: 20px;
+            height: 20px;
+            margin-right: 10px;
+        }
+
+        .myaccount-btn {
+            margin: auto;
+            display: inline-block;
+            // transform: translateY(50%);
+
+        }
+
+        .myorders-btn {
+            margin: auto;
+            display: inline-block;
+            // transform: translateY(50%);
+        }
+    }
+}
+
+@media (min-width: 769px) {
+    ion-content {
+        --offset-top: -40px !important;
+    }
+}

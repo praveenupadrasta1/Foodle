@@ -1,0 +1,22 @@
+<ion-card class="md-elevation-z5">
+  <!-- <div class="ion-activatable ripple-parent">
+    <ion-ripple-effect></ion-ripple-effect>
+  </div> -->
+  <ion-row class="ion-activatable ripple-parent">
+    <ion-ripple-effect></ion-ripple-effect>
+    <ion-col size="10">
+      <div class="cart-icon-label-container" (click)="openCart()" tappable>
+        <div class="cart-icon-badge-container">
+          <ion-icon name="cart" color="darkgreen"></ion-icon>
+          <ion-badge color="danger">{{totalProducts}}</ion-badge>
+        </div>
+        <ion-label>Cart</ion-label>
+      </div>
+    </ion-col>
+    <ion-col class="col-icon" size="2">
+      <div class="up-icon-container" (click)="openCart()" tappable>
+        <ion-icon class="up-icon" name="caret-up-circle" color="darkgreen"></ion-icon>
+      </div>
+    </ion-col>
+  </ion-row>
+</ion-card>

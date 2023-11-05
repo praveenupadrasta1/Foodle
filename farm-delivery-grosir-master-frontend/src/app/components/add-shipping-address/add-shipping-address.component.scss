@@ -1,0 +1,105 @@
+@import '../../../theme/variables.scss';
+@import '../../../theme/colors.scss';
+
+$font-family: 'Roboto';
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0;
+}
+
+.invalid {
+    border: 1px solid var(--ion-color-darkorange);
+}
+
+ion-header {
+    ion-item {
+        --background: var(--ion-color-primary);
+        ion-label {
+            font-family: $font-family;
+            font-size: medium;
+            font-weight: bold;
+        }
+    }
+}
+
+form {
+    margin: 10px;
+
+    ion-input,
+    ion-textarea,
+    ion-label,
+    ion-select {
+        font-family: $font-family;
+        font-size: medium;
+    }
+
+    ion-item {
+        margin: 10px 0;
+
+        &.item-has-focus {
+            --background: rgb(224, 224, 224);
+        }
+    }
+
+    .town-item,
+    .name-item {
+        --color-focused: white !important;
+        --highlight-color-focused: white !important;
+        --background-focused: white;
+        --background: white;
+
+        .first-name {
+            margin-right: 5px;
+            width: 50%;
+        }
+
+        .last-name {
+            width: 50%;
+        }
+    }
+
+    .address-item {
+        ion-textarea {
+            padding-bottom: 5px;
+        }
+    }
+
+    .phone-item {
+        ion-label {
+            background-color: var(--ion-color-light);
+            padding: 5px;
+        }
+    }
+
+    .area-item,
+    .province-item {
+        ion-input {
+            margin-left: 10px;
+            background: var(--ion-color-light);
+        }
+    }
+}
+
+ion-footer {
+    ion-label {
+        margin-left: 10px;
+        font-family: $font-family;
+        font-size: smaller;
+        color: var(--ion-color-darkorange);
+    }
+
+    .btn-submit {
+        text-align: center;
+
+        ion-button {
+            width: 60%;
+            font-family: $font-family;
+            font-size: small;
+            text-transform: none !important;
+        }
+    }
+}

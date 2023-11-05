@@ -1,0 +1,42 @@
+$font-family: 'Roboto';
+
+.sc-ion-searchbar-ios-h {
+    margin-top: 15px !important;
+    height: 52px !important;
+}
+
+ion-buttons {
+    margin-top: 15px !important;
+}
+
+.unselectable {
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.chips-previous-search {
+    min-height: auto;
+    background-color: white;
+    text-align: center;
+    font-family: $font-family;
+    margin: 10px;
+}
+
+.chips-category {
+    margin: 10px;
+    min-height: 100px;
+    background-color: white;
+    text-align: center;
+    font-family: $font-family;
+}
+
+.heading {
+    margin: 5px;
+    font-family: $font-family;
+    font-size: medium;
+    font-weight: bold;
+    text-align: center;
+}
